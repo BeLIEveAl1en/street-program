@@ -1,4 +1,4 @@
-package Entities;
+package org.atrem.street.entities;
 
 public class Human {
     private final String lastName;

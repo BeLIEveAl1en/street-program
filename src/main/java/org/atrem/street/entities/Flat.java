@@ -1,9 +1,9 @@
-package Entities;
+package org.atrem.street.entities;
 
-public class House {
+public class Flat {
     private final int number;
 
-    public House(int number){
+    public Flat(int number){
         this.number = number;
     }
 
