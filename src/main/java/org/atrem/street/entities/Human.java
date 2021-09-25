@@ -1,9 +1,13 @@
 package org.atrem.street.entities;
 
+import java.awt.*;
+import java.util.ArrayList;
+
 public class Human {
     private final String lastName;
     private final String name;
     private int money;
+    private List listOfPet;
 
     public Human(String name, String lastName, int money){
         this.lastName = lastName;
