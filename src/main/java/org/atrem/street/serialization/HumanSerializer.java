@@ -17,6 +17,10 @@ public class HumanSerializer implements Serializer<Human>{
 
     @Override
     public String toJsonArray(List<Human> array) {
+        String jsonArray;
+        for(Human i: array){
+            jsonArray = "{" + "\"name\":" + "\"" + i.getName() + "\"" + "\"lastName\":" + "\"" + i.getLastName() + "\""+ "\"money\":" + "\"" + i.getMoney() + "\"" + "}";
+        }
         return null;
     }
 }
