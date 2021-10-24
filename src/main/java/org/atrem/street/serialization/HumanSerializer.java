@@ -7,12 +7,12 @@ import java.util.List;
 public class HumanSerializer implements Serializer<Human>{
     @Override
     public String toJsonObject(Human obj) {
-        String jsonObj = "{" +
-                "\"lastName\":" + "\"" + obj.getLastName() + "\"" +
-                "\"name\":" + "\"" + obj.getName() + "\"" +
-                "\"money\":" + "\"" + obj.getMoney() + "\"" +
+        return "{" +
+                "\"name\": " + "\"" + obj.getName() + "\", " +
+                "\"lastName\": " + "\"" + obj.getLastName() + "\", " +
+                "\"money\": " + obj.getMoney() + ", " +
+                "\"listOfPet\": " + new PetSerializer().toJsonArray(obj.getListOfPet()) +
                 "}";
-        return jsonObj;
     }
 
     @Override
@@ -20,11 +20,9 @@ public class HumanSerializer implements Serializer<Human>{
         StringBuilder jsonArray = new StringBuilder();
         jsonArray.append("[");
         for(Human human: array){
-            if (!human.equals(array.get(array.size() - 1)))
-                jsonArray.append("{" + "\"name\": " + "\"").append(human.getName()).append("\"" + ", ").append("\"lastName\": " + "\"").append(human.getLastName()).append("\"" + ", ").append("\"money\": " + "\"").append(human.getMoney()).append("\"" + ", ").append("\"listOfPet\": ").append(new PetSerializer().toJsonArray(human.listOfPet)).append("}" + ", ");//new PetSerializer().toJsonArray()
-            else
-                jsonArray.append("{" + "\"name\": " + "\"").append(human.getName()).append("\"" + ", ").append("\"lastName\": " + "\"").append(human.getLastName()).append("\"" + ", ").append("\"money\": " + "\"").append(human.getMoney()).append("\"" + ", ").append("\"listOfPet\": ").append(new PetSerializer().toJsonArray(human.listOfPet)).append("}");
+            jsonArray.append(toJsonObject(human)).append(", ");
         }
+        jsonArray.delete(jsonArray.length() - 2, jsonArray.length());
         jsonArray.append("]");
         return jsonArray.toString();
     }

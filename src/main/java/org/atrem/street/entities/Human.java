@@ -7,7 +7,7 @@ public class Human {
     private final String lastName;
     private final String name;
     private int money;
-    public List<Pet> listOfPet = new ArrayList<>();
+    private final List<Pet> listOfPet = new ArrayList<>();
 
     public Human(String name, String lastName, int money){
         this.lastName = lastName;
@@ -27,7 +27,9 @@ public class Human {
         return money;
     }
 
-    public List getListOfPet(){return listOfPet;}
+    public List<Pet> getListOfPet(){
+        return listOfPet;
+    }
 
     public int setMoney(int money){
         return this.money = money;

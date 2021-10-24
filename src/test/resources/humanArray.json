@@ -1,3 +1,17 @@
 [
-  {"name": "Вася", "latsName": "Пупкин", "money": "100", "listOfPet": [{"name": "Шарик", "type": "CAT"},{"name": "Тузик", "type": "DOG"}]}
+  {
+    "name": "Вася",
+    "latsName": "Пупкин",
+    "money": "100",
+    "listOfPet": [
+      {
+        "name": "Шарик",
+        "type": "CAT"
+      },
+      {
+        "name": "Тузик",
+        "type": "DOG"
+      }
+    ]
+  }
 ]

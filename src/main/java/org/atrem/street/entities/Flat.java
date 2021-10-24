@@ -1,22 +1,21 @@
 package org.atrem.street.entities;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Flat {
     private final int number;
-    public List listOfHuman;
+    private final List<Human> humans;
 
-    public Flat(int number, List listOfHuman){
+    public Flat(int number, List<Human> humans){
         this.number = number;
-        this.listOfHuman = listOfHuman;
+        this.humans = humans;
     }
 
     public int getNumber(){
         return number;
     }
 
-    public List getListOfHuman(int index){
-        return (ArrayList) listOfHuman.get(index);
+    public List<Human> getHumans(){
+        return humans;
     }
 }
