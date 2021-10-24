@@ -17,10 +17,15 @@ public class HumanSerializer implements Serializer<Human>{
 
     @Override
     public String toJsonArray(List<Human> array) {
-        String jsonArray;
-        for(Human i: array){
-            jsonArray = "{" + "\"name\":" + "\"" + i.getName() + "\"" + "\"lastName\":" + "\"" + i.getLastName() + "\""+ "\"money\":" + "\"" + i.getMoney() + "\"" + "}";
+        StringBuilder jsonArray = new StringBuilder();
+        jsonArray.append("[");
+        for(Human human: array){
+            if (!human.equals(array.get(array.size() - 1)))
+                jsonArray.append("{" + "\"name\": " + "\"").append(human.getName()).append("\"" + ", ").append("\"lastName\": " + "\"").append(human.getLastName()).append("\"" + ", ").append("\"money\": " + "\"").append(human.getMoney()).append("\"" + ", ").append("\"listOfPet\": ").append(new PetSerializer().toJsonArray(human.listOfPet)).append("}" + ", ");//new PetSerializer().toJsonArray()
+            else
+                jsonArray.append("{" + "\"name\": " + "\"").append(human.getName()).append("\"" + ", ").append("\"lastName\": " + "\"").append(human.getLastName()).append("\"" + ", ").append("\"money\": " + "\"").append(human.getMoney()).append("\"" + ", ").append("\"listOfPet\": ").append(new PetSerializer().toJsonArray(human.listOfPet)).append("}");
         }
-        return null;
+        jsonArray.append("]");
+        return jsonArray.toString();
     }
 }

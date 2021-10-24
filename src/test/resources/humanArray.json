@@ -1,3 +1,3 @@
 [
-  {"name": "Вася", "latName": "Пупкин", "money": "10_000", "listOfPet": [{"type": "CAT", "name": "Шарик"},{"type": "DOG", "name": "Тузик"}]}
+  {"name": "Вася", "latsName": "Пупкин", "money": "100", "listOfPet": [{"name": "Шарик", "type": "CAT"},{"name": "Тузик", "type": "DOG"}]}
 ]

@@ -1,13 +1,13 @@
 package org.atrem.street.entities;
 
-import java.awt.*;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Flat {
     private final int number;
-    private ArrayList listOfHuman;
+    public List listOfHuman;
 
-    public Flat(int number, ArrayList listOfHuman){
+    public Flat(int number, List listOfHuman){
         this.number = number;
         this.listOfHuman = listOfHuman;
     }
@@ -16,7 +16,7 @@ public class Flat {
         return number;
     }
 
-    public ArrayList getListOfHuman(int index){
+    public List getListOfHuman(int index){
         return (ArrayList) listOfHuman.get(index);
     }
 }
