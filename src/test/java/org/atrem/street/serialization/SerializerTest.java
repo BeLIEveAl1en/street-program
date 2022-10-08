@@ -50,8 +50,7 @@ public class SerializerTest {
         String jsonPetArray = humanSerializerSerializer.toJsonArray(people);
         Assertions.assertEquals(HUMAN_LIST, jsonPetArray);
     }
-
-    @Test
+     @Test
     public void shouldSerializeFlatObject() {
         List<Human> people = mockHumanList();
         Flat flat = new Flat(1, people);

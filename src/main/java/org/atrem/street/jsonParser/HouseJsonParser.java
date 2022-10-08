@@ -1,8 +1,9 @@
 package org.atrem.street.jsonParser;
 
 import org.atrem.street.entities.House;
+import org.atrem.street.entities.Pet;
 
-import java.util.HashMap;
+import java.util.List;
 
 public class HouseJsonParser implements Parser<House>{
     @Override
@@ -11,7 +12,7 @@ public class HouseJsonParser implements Parser<House>{
     }
 
     @Override
-    public House getArrayFromJsonArray(String arg) {
+    public List<House> getArrayFromJsonArray(String jsonArr) {
         return null;
     }
 }

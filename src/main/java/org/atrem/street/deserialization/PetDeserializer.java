@@ -1,6 +1,7 @@
 package org.atrem.street.deserialization;
 import org.atrem.street.entities.Pet;
 import org.atrem.street.jsonParser.PetJsonParser;
+import org.atrem.street.validation.JsonArrayValidator;
 import org.atrem.street.validation.JsonObjectValidator;
 import org.atrem.street.validation.ValidationResult;
 
@@ -23,7 +24,14 @@ public class PetDeserializer implements Deserializer<Pet> {
 
     @Override
     public List<Pet> fromJsonArray(String jsonArray) {
+        JsonArrayValidator jsonArrayValidator = new JsonArrayValidator();
 
-        return null;
+        ValidationResult result = jsonArrayValidator.validate(jsonArray);
+        if(!result.isValid()){
+            throw new IllegalStateException(result.getComment());
+        }
+
+        PetJsonParser petJsonParser = new PetJsonParser();
+        return petJsonParser.getArrayFromJsonArray(jsonArray);
     }
 }
