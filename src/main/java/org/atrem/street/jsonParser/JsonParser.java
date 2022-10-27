@@ -1,35 +1,31 @@
 package org.atrem.street.jsonParser;
 
-import org.atrem.street.entities.Human;
-import org.atrem.street.entities.Pet;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public interface Parser<T>{
+public interface JsonParser<T> {
     T getObjFromJsonObj(String map);
 
     List<T> getArrayFromJsonArray(String jsonArr);
 
-    default ArrayList<HashMap<String, String>> getMapArrayFromJsonArr(String arg){
+    default ArrayList<HashMap<String, String>> getMapArrayFromJsonArr(String arg) {
         ArrayList<HashMap<String, String>> hashMapsArray = new ArrayList<>();
         StringBuilder map = new StringBuilder();
 
         int state = 0;
 
-        for(int i = 0; i < arg.length(); i++){
+        for (int i = 0; i < arg.length(); i++) {
             char element = arg.charAt(i);
 
-
-            switch (state){
+            switch (state) {
                 case 0:
-                    if(element == '{')
+                    if (element == '{')
                         state = 1;
                     break;
 
                 case 1:
-                    if (element == '}'){
+                    if (element == '}') {
                         state = 2;
                         break;
                     }
@@ -46,7 +42,11 @@ public interface Parser<T>{
         return hashMapsArray;
     }
 
-    default HashMap<String, String> getMapFromJsonObj(String arg){
+    default HashMap<String, String> getMapFromJsonObj(String arg) {
+        final int KEY_APPEND_STATE = 0;
+        final int VALUE_APPEND_STATE = 1;
+        final int ENTRY_VALUE_AND_KEY = 2;
+
         HashMap<String, String> map = new HashMap<>();
 
         StringBuilder key = new StringBuilder();
@@ -55,37 +55,34 @@ public interface Parser<T>{
         int state = 0;
         boolean isSquareBrackets = false;
 
-        for (int i =  0; i < arg.length(); i++){
-            char element =  arg.charAt(i);
+        for (int i = 0; i < arg.length(); i++) {
+            char element = arg.charAt(i);
 
-            if(element == ':'){
+            if (element == ':') {
                 state = 1;
-            }
-            else if(element == ']'){
+            } else if (element == ']') {
                 isSquareBrackets = false;
-            }
-            else if(element == '['){
+            } else if (element == '[') {
                 isSquareBrackets = true;
-            }
-            else if((element == ',' || i == arg.length() - 1) && !isSquareBrackets){
+            } else if ((element == ',' || i == arg.length() - 1) && !isSquareBrackets) {
                 state = 2;
             }
 
-            switch (state){
-                case 0:
+            switch (state) {
+                case KEY_APPEND_STATE:
                     if (!(element == '{' || element == '"'))
                         key.append(element);
                     break;
 
-                case 1:
-                    if(isSquareBrackets)
+                case VALUE_APPEND_STATE:
+                    if (isSquareBrackets)
                         value.append(element);
                     else if (!(element == ':' || element == '"'))
                         value.append(element);
                     break;
 
-                case 2:
-                    if(i == arg.length() - 1 && !(element == '}'))
+                case ENTRY_VALUE_AND_KEY:
+                    if (i == arg.length() - 1 && !(element == '}'))
                         value.append(element);
                     map.put(key.toString().strip(), value.toString().strip());
                     key.delete(0, key.length());
@@ -97,13 +94,13 @@ public interface Parser<T>{
         return map;
     }
 
-    default String getClearJsonObj(String arg){
+    default String getClearJsonObj(String arg) {
         StringBuilder jsonObj = new StringBuilder(arg);
-        for (int i = 0; i < jsonObj.length(); i++){
+        for (int i = 0; i < jsonObj.length(); i++) {
             char element = jsonObj.charAt(i);
-            if(element == '{' || element == '}' || element == '"'){
+            if (element == '{' || element == '}' || element == '"') {
                 jsonObj.deleteCharAt(i);
-                i = -1;
+                i--;
             }
         }
         return jsonObj.toString();
