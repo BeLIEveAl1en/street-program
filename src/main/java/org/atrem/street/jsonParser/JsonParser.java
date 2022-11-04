@@ -33,7 +33,7 @@ public interface JsonParser<T> {
                     break;
 
                 case 2:
-                    hashMapsArray.add(getMapFromJsonObj(getClearJsonObj(map.toString())));
+                    hashMapsArray.add(getMapFromJsonObj(map.toString()));
                     map.setLength(0);
                     state = 0;
                     break;
@@ -53,7 +53,7 @@ public interface JsonParser<T> {
         StringBuilder value = new StringBuilder();
 
         int state = 0;
-        boolean isSquareBrackets = false;
+        int counterOfSquareBrackets = 0;
 
         for (int i = 0; i < arg.length(); i++) {
             char element = arg.charAt(i);
@@ -61,10 +61,10 @@ public interface JsonParser<T> {
             if (element == ':') {
                 state = 1;
             } else if (element == ']') {
-                isSquareBrackets = false;
+                counterOfSquareBrackets--;
             } else if (element == '[') {
-                isSquareBrackets = true;
-            } else if ((element == ',' || i == arg.length() - 1) && !isSquareBrackets) {
+                counterOfSquareBrackets++;
+            } else if ((element == ',' || i == arg.length() - 1) && counterOfSquareBrackets == 0) {
                 state = 2;
             }
 
@@ -75,14 +75,12 @@ public interface JsonParser<T> {
                     break;
 
                 case VALUE_APPEND_STATE:
-                    if (isSquareBrackets)
-                        value.append(element);
-                    else if (!(element == ':' || element == '"'))
+                    if (counterOfSquareBrackets > 0 || !(element == ':' || element == '"'))
                         value.append(element);
                     break;
 
                 case ENTRY_VALUE_AND_KEY:
-                    if (i == arg.length() - 1 && !(element == '}'))
+                    if (i == arg.length() - 1 && element != '}' && element != '"')
                         value.append(element);
                     map.put(key.toString().strip(), value.toString().strip());
                     key.delete(0, key.length());
@@ -94,15 +92,46 @@ public interface JsonParser<T> {
         return map;
     }
 
-    default String getClearJsonObj(String arg) {
-        StringBuilder jsonObj = new StringBuilder(arg);
-        for (int i = 0; i < jsonObj.length(); i++) {
-            char element = jsonObj.charAt(i);
-            if (element == '{' || element == '}' || element == '"') {
-                jsonObj.deleteCharAt(i);
-                i--;
+    default ArrayList<String> splitJsonArray(String arg){
+        ArrayList<String> jsons = new ArrayList<>();
+
+        StringBuilder map = new StringBuilder();
+
+        int state = 0;
+        int countOfSquareBrackets = 0;
+
+        for (int i = 0; i < arg.length(); i++) {
+            char element = arg.charAt(i);
+
+            switch (state) {
+                case 0:
+                    if (element == '{') {
+                        map.append(element);
+                        state = 1;
+                    }
+                    break;
+
+                case 1:
+                    if (element == ']')
+                        countOfSquareBrackets--;
+                    else if (element == '[')
+                        countOfSquareBrackets++;
+                    if (element == '}' && countOfSquareBrackets == 0) {
+                        map.append(element);
+                        state = 2;
+                    }
+                    else {
+                        map.append(element);
+                    }
+                    break;
+
+                case 2:
+                    jsons.add(map.toString());
+                    map.setLength(0);
+                    state = 0;
+                    break;
             }
         }
-        return jsonObj.toString();
+        return jsons;
     }
 }
