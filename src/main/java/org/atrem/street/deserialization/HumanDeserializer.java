@@ -2,61 +2,52 @@ package org.atrem.street.deserialization;
 
 import org.atrem.street.entities.Human;
 import org.atrem.street.entities.Pet;
-import org.atrem.street.jsonParser.JsonParser;
-import org.atrem.street.validation.JsonArrayValidator;
-import org.atrem.street.validation.JsonObjectValidator;
-import org.atrem.street.validation.ValidationResult;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
-public class HumanDeserializer implements Deserializer<Human>, JsonParser<Human> {
+import static org.atrem.street.jsonParser.JsonParser.getMapFromJsonObj;
+import static org.atrem.street.jsonParser.JsonParser.splitJsonArray;
+
+public class HumanDeserializer implements Deserializer<Human> {
+    final static List<String> requiredFields = Collections.unmodifiableList(new ArrayList<String>() {{
+        add("name");
+        add("lastName");
+        add("money");
+        add("listOfPet");
+    }});
+
     @Override
     public Human fromJsonObject(String jsonObj) {
-        JsonObjectValidator jsonObjectValidator = new JsonObjectValidator();
+        objValidator(jsonObj);
+        HashMap<String, String> humanMap = getMapFromJsonObj(jsonObj);
+        validateFields(humanMap);
+        String name = humanMap.get("name");
+        String lastName = humanMap.get("lastName");
+        int money = Integer.parseInt(humanMap.get("money"));
+        List<Pet> listOfPet = new PetDeserializer().fromJsonArray(humanMap.get("listOfPet"));
+        Human human = new Human(name, lastName, money);
+        human.setListOfPet(listOfPet);
 
-        ValidationResult result = jsonObjectValidator.validate(jsonObj);
-        if (!result.isValid()) {
-            throw new IllegalStateException(result.getComment());
-        }
-        return getObjFromJsonObj(jsonObj);
+        return human;
     }
 
     @Override
     public List<Human> fromJsonArray(String jsonArray) {
-        JsonArrayValidator jsonArrayValidator = new JsonArrayValidator();
-
-        ValidationResult result = jsonArrayValidator.validate(jsonArray);
-        if (!result.isValid()) {
-            throw new IllegalStateException(result.getComment());
-        }
-        return getArrayFromJsonArray(jsonArray);
-    }
-
-    @Override
-    public Human getObjFromJsonObj(String str) {
-        HashMap<String, String> humanMap = getMapFromJsonObj(str);
-
-        String name = humanMap.get("name");
-        String lastName = humanMap.get("lastName");
-        int money = Integer.parseInt(humanMap.get("money"));
-        List<Pet> listOfPet = new PetDeserializer().getArrayFromJsonArray(humanMap.get("listOfPet"));
-
-        Human ryanGosling = new Human(name, lastName, money);
-        ryanGosling.setListOfPet(listOfPet);
-
-        return ryanGosling;
-    }
-
-    @Override
-    public List<Human> getArrayFromJsonArray(String jsonArr) {
-        ArrayList<String> jsonHumans = splitJsonArray(jsonArr);
+        arrayValidator(jsonArray);
+        ArrayList<String> jsonHumans = splitJsonArray(jsonArray);
         ArrayList<Human> humanList = new ArrayList<>();
 
         for (String jsonHuman : jsonHumans) {
-            humanList.add(getObjFromJsonObj(jsonHuman));
+            humanList.add(fromJsonObject(jsonHuman));
         }
         return humanList;
+    }
+
+    @Override
+    public List<String> getRequiredFields() {
+        return requiredFields;
     }
 }

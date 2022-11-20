@@ -9,7 +9,7 @@ import java.util.List;
 
 public class DeserializerTest {
 
-    private final String HUMAN_LIST = "[{\"name\":\"вася\",\"lastName\":\"пупкин\",\"money\":100,\"listOfPet\":[{\"name\":\"Шарик\",\"type\": \"CAT\"},{\"name\":\"Тузик\",\"type\":\"DOG\"}]},{\"name\":\"андрей\",\"lastName\":\"лукин\",\"money\":250,\"listOfPet\":[{\"name\":\"Кеша\",\"type\":\"BIRD\"}]}]";
+    private final String HUMAN_LIST = "[{\"name\":\"вася\",\"lastName\":\"пупкин\",\"money\":100,\"listOfPet\":[{\"name\":\"Шарик\",\"type\":\"CAT\"},{\"name\":\"Тузик\",\"type\":\"DOG\"}]},{\"name\":\"андрей\",\"lastName\":\"лукин\",\"money\":250,\"listOfPet\":[{\"name\":\"Кеша\",\"type\":\"BIRD\"}]}]";
     private final String FLAT_LIST = "[{\"number\": 1, \"listOfHuman\": " + HUMAN_LIST + "}, {\"number\": 2, \"listOfHuman\": " + HUMAN_LIST + "}]";
     private final String HOUSE_LIST = "[{" + "\"number\": 1, \"listOfFlat\": " + FLAT_LIST + "}, {\"number\": 2, \"listOfFlat\": " + FLAT_LIST + "}]";
 
@@ -69,7 +69,7 @@ public class DeserializerTest {
         humansList.add(human1);
         humansList.add(human2);
         Flat expectedFlat = new Flat(1, humansList);
-        Flat actualFlat = new FlatDeserializer().getObjFromJsonObj(serializedFlat);
+        Flat actualFlat = new FlatDeserializer().fromJsonObject(serializedFlat);
         Assertions.assertEquals(expectedFlat, actualFlat);
     }
 
@@ -86,7 +86,7 @@ public class DeserializerTest {
         humansList.add(human2);
         expectedFlats.add(new Flat(1, humansList));
         expectedFlats.add(new Flat(2, humansList));
-        List<Flat> actualFlats = new FlatDeserializer().getArrayFromJsonArray(FLAT_LIST);
+        List<Flat> actualFlats = new FlatDeserializer().fromJsonArray(FLAT_LIST);
         Assertions.assertEquals(expectedFlats, actualFlats);
     }
 
@@ -105,7 +105,7 @@ public class DeserializerTest {
         flats.add(new Flat(1, humansList));
         flats.add(new Flat(2, humansList));
         House expectedHouse = new House(1, flats);
-        House actualHouse = new HouseDeserializer().getObjFromJsonObj(serializedFlat);
+        House actualHouse = new HouseDeserializer().fromJsonObject(serializedFlat);
         Assertions.assertEquals(expectedHouse, actualHouse);
     }
 
@@ -125,7 +125,7 @@ public class DeserializerTest {
         flatList.add(new Flat(2, humansList));
         expectedHousesList.add(new House(1, flatList));
         expectedHousesList.add(new House(2, flatList));
-        List<House> actualHouses = new HouseDeserializer().getArrayFromJsonArray(HOUSE_LIST);
+        List<House> actualHouses = new HouseDeserializer().fromJsonArray(HOUSE_LIST);
         Assertions.assertEquals(expectedHousesList, actualHouses);
     }
 }

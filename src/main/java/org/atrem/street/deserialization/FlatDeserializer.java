@@ -2,50 +2,46 @@ package org.atrem.street.deserialization;
 
 import org.atrem.street.entities.Flat;
 import org.atrem.street.entities.Human;
-import org.atrem.street.jsonParser.JsonParser;
-import org.atrem.street.validation.JsonObjectValidator;
-import org.atrem.street.validation.ValidationResult;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
-public class FlatDeserializer implements Deserializer<Flat>, JsonParser<Flat> {
+import static org.atrem.street.jsonParser.JsonParser.getMapFromJsonObj;
+import static org.atrem.street.jsonParser.JsonParser.splitJsonArray;
+
+public class FlatDeserializer implements Deserializer<Flat> {
+    final static List<String> requiredFields = Collections.unmodifiableList(new ArrayList<>() {{
+        add("number");
+        add("listOfHuman");
+    }});
+
     @Override
     public Flat fromJsonObject(String jsonObj) {
-        JsonObjectValidator jsonObjectValidator = new JsonObjectValidator();
-
-        ValidationResult result = jsonObjectValidator.validate(jsonObj);
-        if (!result.isValid()) {
-            throw new IllegalStateException(result.getComment());
-        }
-        return getObjFromJsonObj(jsonObj);
-    }
-
-    @Override
-    public List<Flat> fromJsonArray(String jsonArray) {
-        return null;
-    }
-
-    @Override
-    public Flat getObjFromJsonObj(String str) {
-        HashMap<String, String> flat = getMapFromJsonObj(str);
-
-        int number = Integer.parseInt(flat.get("number"));
-        List<Human> humans = new HumanDeserializer().getArrayFromJsonArray(flat.get("listOfHuman"));
-
+        objValidator(jsonObj);
+        HashMap<String, String> flatMap = getMapFromJsonObj(jsonObj);
+        validateFields(flatMap);
+        int number = Integer.parseInt(flatMap.get("number"));
+        List<Human> humans = new HumanDeserializer().fromJsonArray(flatMap.get("listOfHuman"));
         return new Flat(number, humans);
     }
 
     @Override
-    public List<Flat> getArrayFromJsonArray(String jsonArr) {
-        ArrayList<String> jsonFlats = splitJsonArray(jsonArr);
+    public List<Flat> fromJsonArray(String jsonArray) {
+        arrayValidator(jsonArray);
+        ArrayList<String> jsonFlats = splitJsonArray(jsonArray);
         ArrayList<Flat> flatList = new ArrayList<>();
 
         for (String jsonFlat : jsonFlats) {
-            flatList.add(getObjFromJsonObj(jsonFlat));
+            flatList.add(fromJsonObject(jsonFlat));
         }
         return flatList;
+    }
+
+    @Override
+    public List<String> getRequiredFields() {
+        return requiredFields;
     }
 }
 

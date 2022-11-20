@@ -2,44 +2,26 @@ package org.atrem.street.deserialization;
 
 import org.atrem.street.entities.AnimalType;
 import org.atrem.street.entities.Pet;
-import org.atrem.street.jsonParser.JsonParser;
-//import org.atrem.street.jsonParser.PetParser;
-import org.atrem.street.validation.JsonArrayValidator;
-import org.atrem.street.validation.JsonObjectValidator;
-import org.atrem.street.validation.ValidationResult;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
-public class PetDeserializer implements Deserializer<Pet>, JsonParser<Pet> {
+import static org.atrem.street.jsonParser.JsonParser.getMapFromJsonObj;
+import static org.atrem.street.jsonParser.JsonParser.splitJsonArray;
+
+public class PetDeserializer implements Deserializer<Pet> {
+    final static List<String> requiredFields = Collections.unmodifiableList(new ArrayList<>() {{
+        add("name");
+        add("type");
+    }});
 
     @Override
     public Pet fromJsonObject(String jsonObj) {
-        JsonObjectValidator jsonObjectValidator = new JsonObjectValidator();
-
-        ValidationResult result = jsonObjectValidator.validate(jsonObj);
-        if (!result.isValid()) {
-            throw new IllegalStateException(result.getComment());
-        }
-        return getObjFromJsonObj(jsonObj);
-    }
-
-    @Override
-    public List<Pet> fromJsonArray(String jsonArray) {
-        JsonArrayValidator jsonArrayValidator = new JsonArrayValidator();
-
-        ValidationResult result = jsonArrayValidator.validate(jsonArray);
-        if (!result.isValid()) {
-            throw new IllegalStateException(result.getComment());
-        }
-        return getArrayFromJsonArray(jsonArray);
-    }
-
-    @Override
-    public Pet getObjFromJsonObj(String arg) {
-        HashMap<String, String> petMap = getMapFromJsonObj(arg);
-
+        objValidator(jsonObj);
+        HashMap<String, String> petMap = getMapFromJsonObj(jsonObj);
+        validateFields(petMap);
         String name = petMap.get("name");
         AnimalType type = AnimalType.valueOf(petMap.get("type"));
 
@@ -47,13 +29,19 @@ public class PetDeserializer implements Deserializer<Pet>, JsonParser<Pet> {
     }
 
     @Override
-    public List<Pet> getArrayFromJsonArray(String arg) {
-        ArrayList<String> jsonPets = splitJsonArray(arg);
+    public List<Pet> fromJsonArray(String jsonArray) {
+        arrayValidator(jsonArray);
+        ArrayList<String> jsonPets = splitJsonArray(jsonArray);
         ArrayList<Pet> petList = new ArrayList<>();
 
         for (String pet : jsonPets) {
-            petList.add(getObjFromJsonObj(pet));
+            petList.add(fromJsonObject(pet));
         }
         return petList;
+    }
+
+    @Override
+    public List<String> getRequiredFields() {
+        return requiredFields;
     }
 }
