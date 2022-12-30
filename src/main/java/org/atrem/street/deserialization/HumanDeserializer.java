@@ -12,7 +12,7 @@ import static org.atrem.street.jsonParser.JsonParser.getMapFromJsonObj;
 import static org.atrem.street.jsonParser.JsonParser.splitJsonArray;
 
 public class HumanDeserializer implements Deserializer<Human> {
-    final static List<String> requiredFields = Collections.unmodifiableList(new ArrayList<String>() {{
+    final static List<String> requiredFields = Collections.unmodifiableList(new ArrayList<>() {{
         add("name");
         add("lastName");
         add("money");

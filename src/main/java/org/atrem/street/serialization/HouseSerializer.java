@@ -7,8 +7,7 @@ import java.util.List;
 public class HouseSerializer implements Serializer<House> {
     @Override
     public String toJsonObject(House obj) {
-        return "{" +
-                "\"number\": " + obj.getNumber() + ", \"listOfFlats\": " + new FlatSerializer().toJsonArray(obj.getListOfFlats()) + "}";
+        return "{\"number\": " + obj.getNumber() + ", \"listOfFlats\": " + new FlatSerializer().toJsonArray(obj.getListOfFlats()) + "}";
     }
 
     @Override

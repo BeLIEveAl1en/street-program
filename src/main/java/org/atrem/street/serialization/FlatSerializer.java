@@ -8,8 +8,7 @@ public class FlatSerializer implements Serializer<Flat> {
 
     @Override
     public String toJsonObject(Flat flat) {
-        return "{" +
-                "\"number\": " + flat.getNumber() + ", " + "\"listOfHuman\": " + new HumanSerializer().toJsonArray(flat.getHumans()) + "}";
+        return "{\"number\": " + flat.getNumber() + ", " + "\"listOfHuman\": " + new HumanSerializer().toJsonArray(flat.getHumans()) + "}";
     }
 
     @Override
