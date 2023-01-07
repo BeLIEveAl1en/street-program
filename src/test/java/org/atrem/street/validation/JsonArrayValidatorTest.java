@@ -29,11 +29,11 @@ public class JsonArrayValidatorTest {
 
     @Test
     public void shouldValidateJsonArrayWithAllTypesElements() {
-        shouldValidateJsonArray("[[],{},\"abc\",44.7]");
+        shouldValidateJsonArray("[[],{},\"abc\",44.7,null,true,false]");
     }
 
     @Test
-    public void should_validate_human_list() {
+    public void shouldValidateHumanList() {
         shouldValidateJsonArray(HUMAN_LIST);
     }
 

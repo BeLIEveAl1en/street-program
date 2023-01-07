@@ -10,8 +10,6 @@ public class JsonObjectValidatorTest {
     private final String HUMAN_LIST = "[" + HUMAN_1 + "," + HUMAN_2 + "]";
 
     public void shouldValidateJsonObj(String str) {
-        //String testJsonString = String.join("", Files.readAllLines(Path.of(path)));
-
         JsonObjectValidator validator = new JsonObjectValidator();
 
         ValidationResult result = validator.validate(str);
@@ -28,33 +26,38 @@ public class JsonObjectValidatorTest {
     }
 
     @Test
-    public void should_validate_when_nested_array_contains_two_obj() {
+    public void shouldValidateWhenNestedArrayContainsTwoObj() {
         shouldValidateJsonObj(HUMAN_1);
     }
 
     @Test
-    public void should_validate_human_list() {
+    public void shouldValidateHumanList() {
         shouldValidateJsonObj("{" + "\"number\": 1,\"listOfHuman\":" + HUMAN_LIST + "}");
     }
 
     @Test
-    public void should_Validate_Json_Obj_With_Whitespace() {
+    public void shouldValidateJsonObjWithWhitespace() {
         shouldValidateJsonObj("{\"name\":\"Вася\",\"old\":34, \"list\":[iriirir]}");
     }
 
     @Test
-    public void should_Validate_Json_Obj_With_Integer() {
+    public void shouldValidateJsonObjWithInteger() {
         shouldValidateJsonObj("{\" name \" : 55.5, \"old\" : 34}");
     }
 
     @Test
-    public void should_Validate_Json_Obj_With_String_Null() {
+    public void shouldValidateJsonObjWithStringNull() {
         shouldValidateJsonObj("{\"name\":null}");
     }
 
     @Test
     public void shouldValidateJsonObjWithStringFalse() {
         shouldValidateJsonObj("{\"name\":false}");
+    }
+
+    @Test
+    public void shouldValidateJsonObjWithStringTrue() {
+        shouldValidateJsonObj("{\"name\":true}");
     }
 
     @Test

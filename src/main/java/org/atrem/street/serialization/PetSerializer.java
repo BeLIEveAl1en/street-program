@@ -8,7 +8,7 @@ public class PetSerializer implements Serializer<Pet> {
 
     @Override
     public String toJsonObject(Pet pet) {
-        return "{\"name\": " + "\"" + pet.getName() + "\",\"type\": " + "\"" + pet.getType().name() + "\"}";
+        return "{\"name\": " + "\"" + pet.getName() + "\", \"type\": " + "\"" + pet.getType().name() + "\"}";
     }
 
     @Override

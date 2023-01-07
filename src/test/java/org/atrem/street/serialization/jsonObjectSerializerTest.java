@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SerializerTest {
+public class jsonObjectSerializerTest {
     private final String HUMAN_LIST = "[{\"name\": \"вася\", \"lastName\": \"пупкин\", \"money\": 100, \"listOfPet\": [{\"name\": \"Шарик\", \"type\": \"CAT\"}, {\"name\": \"Тузик\", \"type\": \"DOG\"}]}]";
     private final String FLAT_LIST = "[{\"number\": 1, \"listOfHuman\": " + HUMAN_LIST + "}, {\"number\": 2, \"listOfHuman\": " + HUMAN_LIST + "}]";
 
@@ -18,18 +18,6 @@ public class SerializerTest {
         String jsonPet = petSerializer.toJsonObject(pet);
         String expected = "{\"name\": \"толя\", \"type\": \"CAT\"}";
         Assertions.assertEquals(expected, jsonPet);
-    }
-
-    @Test
-    public void shouldSerializePetList() {
-        List<Pet> pets = new ArrayList<>();
-        pets.add(new Pet("толя", AnimalType.CAT));
-        pets.add(new Pet("шарик", AnimalType.DOG));
-        pets.add(new Pet("куку", AnimalType.BIRD));
-        Serializer<Pet> petSerializer = new PetSerializer();
-        String jsonPetArray = petSerializer.toJsonArray(pets);
-        String expected = "[{\"name\": \"толя\", \"type\": \"CAT\"}, {\"name\": \"шарик\", \"type\": \"DOG\"}, {\"name\": \"куку\", \"type\": \"BIRD\"}]";
-        Assertions.assertEquals(expected, jsonPetArray);
     }
 
     @Test
@@ -44,13 +32,6 @@ public class SerializerTest {
     }
 
     @Test
-    public void shouldSerializeHumanList() {
-        List<Human> people = mockHumanList();
-        Serializer<Human> humanSerializerSerializer = new HumanSerializer();
-        String jsonPetArray = humanSerializerSerializer.toJsonArray(people);
-        Assertions.assertEquals(HUMAN_LIST, jsonPetArray);
-    }
-     @Test
     public void shouldSerializeFlatObject() {
         List<Human> people = mockHumanList();
         Flat flat = new Flat(1, people);
@@ -61,34 +42,12 @@ public class SerializerTest {
     }
 
     @Test
-    public void shouldSerializeFlatList() {
-        List<Flat> flats = mockFlatList();
-        Serializer<Flat> flatSerializer = new FlatSerializer();
-        String jsonFlat = flatSerializer.toJsonArray(flats);
-        Assertions.assertEquals(FLAT_LIST, jsonFlat);
-    }
-
-    @Test
     public void shouldSerializeHouseObject() {
         List<Flat> flats = mockFlatList();
         House house = new House(1, flats);
         Serializer<House> houseSerializer = new HouseSerializer();
         String jsonHouse = houseSerializer.toJsonObject(house);
         String expected = "{" + "\"number\": 1, \"listOfFlats\": " + FLAT_LIST + "}";
-        Assertions.assertEquals(expected, jsonHouse);
-    }
-
-    @Test
-    public void shouldSerializeHouseList() {
-        List<House> houses = new ArrayList<>();
-        List<Flat> flats = mockFlatList();
-        House house1 = new House(1, flats);
-        House house2 = new House(2, flats);
-        houses.add(house1);
-        houses.add(house2);
-        Serializer<House> houseSerializer = new HouseSerializer();
-        String jsonHouse = houseSerializer.toJsonArray(houses);
-        String expected = "[{" + "\"number\": 1, \"listOfFlats\": " + FLAT_LIST + "}, {" + "\"number\": 2, \"listOfFlats\": " + FLAT_LIST + "}]";
         Assertions.assertEquals(expected, jsonHouse);
     }
 

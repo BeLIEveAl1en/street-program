@@ -85,7 +85,7 @@ public class JsonObjectValidator {
                     counter++;
                 } else if (symbol == 'u' && counter == 1) {
                     counter++;
-                } else if (symbol == 'e' && counter == 1) {
+                } else if (symbol == 'e' && counter == 2) {
                     counter = 0;
                     state.setState(9);
                 } else {

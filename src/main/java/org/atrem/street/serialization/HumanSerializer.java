@@ -7,7 +7,7 @@ import java.util.List;
 public class HumanSerializer implements Serializer<Human> {
     @Override
     public String toJsonObject(Human obj) {
-        return "{\"name\": " + "\"" + obj.getName() + "\",\"lastName\": " + "\"" + obj.getLastName() + "\",\"money\": " + obj.getMoney() + ", \"listOfPet\": " + new PetSerializer().toJsonArray(obj.getListOfPet()) + "}";
+        return "{\"name\": " + "\"" + obj.getName() + "\", \"lastName\": " + "\"" + obj.getLastName() + "\", \"money\": " + obj.getMoney() + ", \"listOfPet\": " + new PetSerializer().toJsonArray(obj.getListOfPet()) + "}";
     }
 
     @Override
