@@ -69,7 +69,7 @@ public class JsonParser {
                 case KEY_APPEND_STATE:
                     if (element == '{') {
                         map.append(element);
-                        state = 1;
+                        state = VALUE_APPEND_STATE;
                     }
                     break;
 
