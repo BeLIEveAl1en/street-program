@@ -7,21 +7,20 @@ public class JsonArrayValidator {
     private int counter = 0;
     private int counterOfQuotes = 0;
     private boolean flagOfBrackets = true;
-    private boolean flagOfBraces = true;
+    private int counterOfBraces = 0;
     private boolean flagOfDot = true;
     private final State state = new State(0);
 
-    public ValidationResult validate(String inputStr){
+    public ValidationResult validate(String inputStr) {
         str = inputStr.toCharArray();
         ValidationResult result;
-        for (position = 0; position < str.length; position++){
+        for (position = 0; position < str.length; position++) {
             if (!validationSymbol())
                 return ValidationResult.unexpectedSymbol(str[position], position);
         }
-        if (flagOfBraces && flagOfBrackets && counterOfQuotes == 0 && buf){
+        if (counterOfBraces == 0 && flagOfBrackets && counterOfQuotes == 0 && buf) {
             result = ValidationResult.valid();
-        }
-        else {
+        } else {
             result = ValidationResult.unexpectedEOF();
         }
         return result;
@@ -40,39 +39,30 @@ public class JsonArrayValidator {
                 return true;
 
             case 1:
-                if(symbol == '"' && counterOfQuotes == 0){
+                if (symbol == '"' && counterOfQuotes == 0) {
                     counterOfQuotes++;
                     state.setState(2);
-                }
-                else if (symbol == 't'){
+                } else if (symbol == 't') {
                     state.setState(3);
-                }
-                else if (symbol == 'f'){
+                } else if (symbol == 'f') {
                     state.setState(4);
-                }
-                else if (symbol == 'n'){
+                } else if (symbol == 'n') {
                     state.setState(5);
-                }
-                else if (Character.isDigit(symbol)){
+                } else if (Character.isDigit(symbol)) {
                     flagOfDot = true;
                     state.setState(6);
-                }
-                else if (symbol == '{'){
-                    flagOfBraces = false;
+                } else if (symbol == '{') {
+                    counterOfBraces++;
                     state.setState(7);
-                }
-                else if (symbol == '['){
+                } else if (symbol == '[') {
                     buf = false;
                     state.setState(8);
-                }
-                else if(symbol == ','){
+                } else if (symbol == ',') {
 
-                }
-                else if(symbol == ']'){
+                } else if (symbol == ']') {
                     flagOfBrackets = true;
                     state.setState(9);
-                }
-                else {
+                } else {
                     return false;
                 }
                 return true;
@@ -81,87 +71,74 @@ public class JsonArrayValidator {
                 if (symbol == '"') {
                     counterOfQuotes--;
                     state.setState(1);
-                }
-                else if (!Character.isAlphabetic(symbol)) {
+                } else if (!Character.isAlphabetic(symbol)) {
                     return false;
                 }
                 return true;
 
             case 3:
-                if (symbol == 'r' && counter == 0){
+                if (symbol == 'r' && counter == 0) {
                     counter++;
-                }
-                else if (symbol == 'u'  && counter == 1){
+                } else if (symbol == 'u' && counter == 1) {
                     counter++;
-                }
-                else if (symbol == 'e'  && counter == 2){
+                } else if (symbol == 'e' && counter == 2) {
                     counter = 0;
                     state.setState(1);
-                }
-                else {
+                } else {
                     return false;
                 }
                 return true;
 
             case 4:
-                if (symbol == 'a'  && counter == 0){
+                if (symbol == 'a' && counter == 0) {
                     counter++;
-                }
-                else if (symbol == 'l'  && counter == 1){
+                } else if (symbol == 'l' && counter == 1) {
                     counter++;
-                }
-                else if (symbol == 's'  && counter == 2){
+                } else if (symbol == 's' && counter == 2) {
                     counter++;
-                }
-                else if (symbol == 'e'  && counter == 3){
+                } else if (symbol == 'e' && counter == 3) {
                     counter = 0;
                     state.setState(1);
-                }
-                else {
+                } else {
                     return false;
                 }
                 return true;
 
             case 5:
-                if (symbol == 'u'  && counter == 0){
+                if (symbol == 'u' && counter == 0) {
                     counter++;
-                }
-                else if (symbol == 'l'  && counter == 1){
+                } else if (symbol == 'l' && counter == 1) {
                     counter++;
-                }
-                else if (symbol == 'l'  && counter == 2){
+                } else if (symbol == 'l' && counter == 2) {
                     counter = 0;
                     state.setState(1);
-                }
-                else {
+                } else {
                     return false;
                 }
                 return true;
 
             case 6:
-                if (Character.isDigit(symbol)){
+                if (Character.isDigit(symbol)) {
                     state.setState(6);
-                }
-                else if(symbol == '.' && flagOfDot){
+                } else if (symbol == '.' && flagOfDot) {
                     flagOfDot = false;
-                }
-                else if(symbol == ','){
+                } else if (symbol == ',') {
                     state.setState(1);
-                }
-                else if(symbol == ']'){
+                } else if (symbol == ']') {
                     flagOfBrackets = true;
                     state.setState(9);
-                }
-                else {
+                } else {
                     return false;
                 }
                 return true;
 
             case 7:
-                if (symbol == '}') {
-                    flagOfBraces = true;
+                if (symbol == '}')
+                    counterOfBraces--;
+                if (symbol == '{')
+                    counterOfBraces++;
+                if (counterOfBraces == 0)
                     state.setState(1);
-                }
                 return true;
 
             case 8:
@@ -172,7 +149,11 @@ public class JsonArrayValidator {
                 return true;
 
             case 9:
-                return true;
+                if (symbol == ']' || symbol == '}') {
+                    state.setState(1);
+                    return true;
+                }
+                return false;
         }
         return false;
     }

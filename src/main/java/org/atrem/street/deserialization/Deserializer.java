@@ -6,13 +6,14 @@ import org.atrem.street.validation.ValidationResult;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 public interface Deserializer<T> {
 
-    T fromJsonObject(String jsonObj);
+    T convertFromJsonObject(String jsonObj);
 
-    List<T> fromJsonArray(String jsonArray);
+    List<T> convertFromJsonArray(String jsonArray);
 
     default void objValidator(String obj) {
         JsonObjectValidator jsonObjectValidator = new JsonObjectValidator();
@@ -34,7 +35,7 @@ public interface Deserializer<T> {
 
     List<String> getRequiredFields();
 
-    default void validateFields(HashMap<String, String> map) {
+    default void validateFields(Map<String, String> map) {
         boolean flag = true;
         for (int i = 0; i < getRequiredFields().size(); i++) {
             for (int j = 0; j < getRequiredFields().size(); j++) {

@@ -1,7 +1,7 @@
 {
-  "name": "Вася",
-  "lastName": "Пупкин",
-  "money": "100",
+  "name": "вася",
+  "lastName": "пупкин",
+  "money": 100,
   "listOfPet": [
     {
       "name": "Шарик",

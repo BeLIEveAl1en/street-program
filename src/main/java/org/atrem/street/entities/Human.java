@@ -10,34 +10,34 @@ public class Human {
     private int money;
     private final List<Pet> listOfPet = new ArrayList<>();
 
-    public Human(String name, String lastName, int money){
+    public Human(String name, String lastName, int money) {
         this.lastName = lastName;
         this.name = name;
         this.money = money;
     }
 
-    public String getLastName(){
+    public String getLastName() {
         return lastName;
     }
 
-    public String getName(){
+    public String getName() {
         return name;
     }
 
-    public int getMoney(){
+    public int getMoney() {
         return money;
     }
 
-    public List<Pet> getListOfPet(){
+    public List<Pet> getListOfPet() {
         return listOfPet;
     }
 
-    public List<Pet> setListOfPet(List<Pet> listOfPet){
+    public List<Pet> addPets(List<Pet> listOfPet) {
         this.listOfPet.addAll(listOfPet);
         return listOfPet;
     }
 
-    public int setMoney(int money){
+    public int setMoney(int money) {
         return this.money = money;
     }
 

@@ -6,21 +6,39 @@ import org.atrem.street.entities.Human;
 import org.atrem.street.entities.Pet;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.junit.platform.commons.util.StringUtils;
 
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class JsonFlatSerializerTest {
-    private final String HUMAN_LIST = "[{\"name\": \"вася\", \"lastName\": \"пупкин\", \"money\": 100, \"listOfPet\": [{\"name\": \"Шарик\", \"type\": \"CAT\"}, {\"name\": \"Тузик\", \"type\": \"DOG\"}]}]";
+    private final FlatSerializer FLAT_SERIALIZER = new FlatSerializer();
 
-    private final String FLAT_LIST = "[{\"number\": 1, \"listOfHuman\": " + HUMAN_LIST + "}, {\"number\": 2, \"listOfHuman\": " + HUMAN_LIST + "}]";
+    private String getExpectedJSON(String file) {
+        String expectedJSON = "";
+        try (FileReader reader = new FileReader(file)) {
+            int symbol;
+            while ((symbol = reader.read()) != -1) {
+                expectedJSON += (char) symbol;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return expectedJSON.replaceAll("\\s", "");
+    }
 
     private List<Human> mockHumanList() {
         List<Human> people = new ArrayList<>();
         Human human = new Human("вася", "пупкин", 100);
+        Human human2 = new Human("андрей", "лукин", 250);
         people.add(human);
+        people.add(human2);
         human.getListOfPet().add(new Pet("Шарик", AnimalType.CAT));
         human.getListOfPet().add(new Pet("Тузик", AnimalType.DOG));
+        human2.getListOfPet().add(new Pet("Кеша", AnimalType.BIRD));
         return people;
     }
 
@@ -38,18 +56,14 @@ public class JsonFlatSerializerTest {
     public void shouldSerializeFlatObject() {
         List<Human> people = mockHumanList();
         Flat flat = new Flat(1, people);
-        Serializer<Flat> flatSerializer = new FlatSerializer();
-        String jsonFlat = flatSerializer.toJsonObject(flat);
-        String expected = "{" + "\"number\": 1, \"listOfHuman\": " + HUMAN_LIST + "}";
-        Assertions.assertEquals(expected, jsonFlat);
+        String jsonFlat = FLAT_SERIALIZER.toJsonObject(flat);
+        Assertions.assertEquals(getExpectedJSON("C:\\java\\programs\\street-program\\src\\test\\resources\\flat.json"), jsonFlat);
     }
 
     @Test
     public void shouldSerializeFlatList() {
         List<Flat> flats = mockFlatList();
-        Serializer<Flat> flatSerializer = new FlatSerializer();
-        String jsonFlat = flatSerializer.toJsonArray(flats);
-        Assertions.assertEquals(FLAT_LIST, jsonFlat);
+        String jsonFlat = FLAT_SERIALIZER.toJsonArray(flats);
+        Assertions.assertEquals(getExpectedJSON("C:\\java\\programs\\street-program\\src\\test\\resources\\flatList.json"), jsonFlat);
     }
-
 }

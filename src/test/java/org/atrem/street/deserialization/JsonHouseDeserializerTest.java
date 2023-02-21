@@ -4,18 +4,30 @@ import org.atrem.street.entities.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class JsonHouseDeserializerTest {
-    private final String HUMAN_LIST = "[{\"name\":\"вася\",\"lastName\":\"пупкин\",\"money\":100,\"listOfPet\":[{\"name\":\"Шарик\",\"type\":\"CAT\"},{\"name\":\"Тузик\",\"type\":\"DOG\"}]},{\"name\":\"андрей\",\"lastName\":\"лукин\",\"money\":250,\"listOfPet\":[{\"name\":\"Кеша\",\"type\":\"BIRD\"}]}]";
-    private final String FLAT_LIST = "[{\"number\": 1, \"listOfHuman\": " + HUMAN_LIST + "}, {\"number\": 2, \"listOfHuman\": " + HUMAN_LIST + "}]";
-    private final String HOUSE_LIST = "[{" + "\"number\": 1, \"listOfFlat\": " + FLAT_LIST + "}, {\"number\": 2, \"listOfFlat\": " + FLAT_LIST + "}]";
+    private final HouseDeserializer HOUSE_DESERIALIZER = new HouseDeserializer();
 
+    private String getJSON(String file) {
+        String expectedJSON = "";
+        try (FileReader reader = new FileReader(file)) {
+            int symbol;
+            while ((symbol = reader.read()) != -1) {
+                expectedJSON += (char) symbol;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return expectedJSON.replaceAll("\\s", "");
+    }
 
     @Test
     public void shouldDeserializeHouseObj() {
-        String serializedFlat = "{" + "\"number\": 1, \"listOfFlat\": " + FLAT_LIST + "}";
+        String serializedFlat = getJSON("C:\\java\\programs\\street-program\\src\\test\\resources\\house.json");
         List<Flat> flats = new ArrayList<>();
         List<Human> humansList = new ArrayList<>();
         Human human1 = new Human("вася", "пупкин", 100);
@@ -28,7 +40,7 @@ public class JsonHouseDeserializerTest {
         flats.add(new Flat(1, humansList));
         flats.add(new Flat(2, humansList));
         House expectedHouse = new House(1, flats);
-        House actualHouse = new HouseDeserializer().fromJsonObject(serializedFlat);
+        House actualHouse = HOUSE_DESERIALIZER.convertFromJsonObject(serializedFlat);
         Assertions.assertEquals(expectedHouse, actualHouse);
     }
 
@@ -48,7 +60,7 @@ public class JsonHouseDeserializerTest {
         flatList.add(new Flat(2, humansList));
         expectedHousesList.add(new House(1, flatList));
         expectedHousesList.add(new House(2, flatList));
-        List<House> actualHouses = new HouseDeserializer().fromJsonArray(HOUSE_LIST);
+        List<House> actualHouses = HOUSE_DESERIALIZER.convertFromJsonArray(getJSON("C:\\java\\programs\\street-program\\src\\test\\resources\\houseList.json"));
         Assertions.assertEquals(expectedHousesList, actualHouses);
     }
 }

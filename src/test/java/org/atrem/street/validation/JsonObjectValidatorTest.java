@@ -14,15 +14,15 @@ public class JsonObjectValidatorTest {
 
         ValidationResult result = validator.validate(str);
 
-        Assertions.assertTrue(result.isValid(), String.valueOf(true));
+        Assertions.assertTrue(result.isValid(), "true");
     }
 
-    public void shouldFailValidationOfJsonArrayValidateJsonObj(String str) {
+    public void shouldFailValidateJsonObj(String str) {
         JsonObjectValidator validator = new JsonObjectValidator();
 
         ValidationResult result = validator.validate(str);
 
-        Assertions.assertFalse(result.isValid(), String.valueOf(true));
+        Assertions.assertFalse(result.isValid(), "true2");
     }
 
     @Test
@@ -67,21 +67,21 @@ public class JsonObjectValidatorTest {
 
     @Test
     public void shouldFailValidationJsonObjWithExtraLetter() {
-        shouldFailValidationOfJsonArrayValidateJsonObj("{\"name\"f:\"Вася\"}");
+        shouldFailValidateJsonObj("{\"name\"f:\"Вася\"}");
     }
 
     @Test
     public void shouldFailValidationJsonObjWithTwoColon() {
-        shouldFailValidationOfJsonArrayValidateJsonObj("{\"name\"::\"Вася\"}");
+        shouldFailValidateJsonObj("{\"name\"::\"Вася\"}");
     }
 
     @Test
     public void shouldFailValidationJsonObjWithExtraQuotes() {
-        shouldFailValidationOfJsonArrayValidateJsonObj("{\"\"name\"\":\"Вася\"}");
+        shouldFailValidateJsonObj("{\"\"name\"\":\"Вася\"}");
     }
 
     @Test
     public void shouldFailValidationJsonObjWithUnexpectedEOF() {
-        shouldFailValidationOfJsonArrayValidateJsonObj("{\"name\":\"Вася\"");
+        shouldFailValidateJsonObj("{\"name\":\"Вася\"");
     }
 }

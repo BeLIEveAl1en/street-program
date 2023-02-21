@@ -9,14 +9,14 @@ public class JsonArrayValidatorTest {
     private final String HUMAN_2 = "{\"name\":\"андрей\",\"lastName\":\"лукин\",\"money\":250,\"listOfPet\":[{\"name\":\"Кеша\",\"type\":\"BIRD\"}]}";
     private final String HUMAN_LIST = "[" + HUMAN_1 + "," + HUMAN_2 + "]";
 
-    private final String FLAT_LIST = "[{\"number\": 1, \"listOfHuman\": " + HUMAN_LIST + "}, {\"number\": 2, \"listOfHuman\": " + HUMAN_LIST + "}]";
+    private final String FLAT_LIST = "[{\"number\": 1, \"listOfHuman\": " + HUMAN_LIST + "},{\"number\": 2, \"listOfHuman\": " + HUMAN_LIST + "}]";
 
     public void shouldValidateJsonArray(String str) {
         JsonArrayValidator validator = new JsonArrayValidator();
 
         ValidationResult result = validator.validate(str);
 
-        Assertions.assertTrue(result.isValid(), String.valueOf(true));
+        Assertions.assertTrue(result.isValid(), "true");
     }
 
     public void shouldFailValidationOfJsonArray(String str) {
@@ -24,7 +24,7 @@ public class JsonArrayValidatorTest {
 
         ValidationResult result = validator.validate(str);
 
-        Assertions.assertFalse(result.isValid(), String.valueOf(true));
+        Assertions.assertFalse(result.isValid(), "true");
     }
 
     @Test
@@ -63,7 +63,7 @@ public class JsonArrayValidatorTest {
     }
 
     @Test
-    public void shouldFailValidationOfJsonArrayWithEMissingBracket() {
+    public void shouldFailValidationOfJsonArrayWithMissingBracket() {
         shouldFailValidationOfJsonArray("[{}[]");
     }
 }

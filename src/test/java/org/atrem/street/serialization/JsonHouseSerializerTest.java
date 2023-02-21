@@ -4,20 +4,36 @@ import org.atrem.street.entities.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class JsonHouseSerializerTest {
+    private final HouseSerializer HOUSE_SERIALIZER = new HouseSerializer();
 
-    private final String HUMAN_LIST = "[{\"name\": \"вася\", \"lastName\": \"пупкин\", \"money\": 100, \"listOfPet\": [{\"name\": \"Шарик\", \"type\": \"CAT\"}, {\"name\": \"Тузик\", \"type\": \"DOG\"}]}]";
-    private final String FLAT_LIST = "[{\"number\": 1, \"listOfHuman\": " + HUMAN_LIST + "}, {\"number\": 2, \"listOfHuman\": " + HUMAN_LIST + "}]";
+    private String getExpectedJSON(String file) {
+        String expectedJSON = "";
+        try (FileReader reader = new FileReader(file)) {
+            int symbol;
+            while ((symbol = reader.read()) != -1) {
+                expectedJSON += (char) symbol;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return expectedJSON.replaceAll("\\s", "");
+    }
 
     private List<Human> mockHumanList() {
         List<Human> people = new ArrayList<>();
         Human human = new Human("вася", "пупкин", 100);
+        Human human2 = new Human("андрей", "лукин", 250);
         people.add(human);
+        people.add(human2);
         human.getListOfPet().add(new Pet("Шарик", AnimalType.CAT));
         human.getListOfPet().add(new Pet("Тузик", AnimalType.DOG));
+        human2.getListOfPet().add(new Pet("Кеша", AnimalType.BIRD));
         return people;
     }
 
@@ -35,10 +51,8 @@ public class JsonHouseSerializerTest {
     public void shouldSerializeHouseObject() {
         List<Flat> flats = mockFlatList();
         House house = new House(1, flats);
-        Serializer<House> houseSerializer = new HouseSerializer();
-        String jsonHouse = houseSerializer.toJsonObject(house);
-        String expected = "{" + "\"number\": 1, \"listOfFlats\": " + FLAT_LIST + "}";
-        Assertions.assertEquals(expected, jsonHouse);
+        String jsonHouse = HOUSE_SERIALIZER.toJsonObject(house);
+        Assertions.assertEquals(getExpectedJSON("C:\\java\\programs\\street-program\\src\\test\\resources\\house.json"), jsonHouse);
     }
 
     @Test
@@ -49,9 +63,7 @@ public class JsonHouseSerializerTest {
         House house2 = new House(2, flats);
         houses.add(house1);
         houses.add(house2);
-        Serializer<House> houseSerializer = new HouseSerializer();
-        String jsonHouse = houseSerializer.toJsonArray(houses);
-        String expected = "[{" + "\"number\": 1, \"listOfFlats\": " + FLAT_LIST + "}, {" + "\"number\": 2, \"listOfFlats\": " + FLAT_LIST + "}]";
-        Assertions.assertEquals(expected, jsonHouse);
+        String jsonHouse = HOUSE_SERIALIZER.toJsonArray(houses);
+        Assertions.assertEquals(getExpectedJSON("C:\\java\\programs\\street-program\\src\\test\\resources\\houseList.json"), jsonHouse);
     }
 }

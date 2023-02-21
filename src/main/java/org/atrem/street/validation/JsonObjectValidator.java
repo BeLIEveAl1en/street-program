@@ -4,11 +4,11 @@ public class JsonObjectValidator {
     private char[] str = new char[0];
     private int counter = 0;
     private int position = 0;
-    private int counterOfQuotes = 0;
-    private boolean flagOfCurlyBrackets = true;
-    private int counterOfSquareBrackets = 0;
-    private boolean flagOfBuf = true;
-    private boolean flagOfDot = true;
+    private int counterOfQuotes = 0; // Счётчик кавычек требуется для коректного завершения строки
+    private boolean isCurlyBrackets = true; // Флаг фигурных скобок для правильного коректного считавания объекта
+    private int counterOfSquareBrackets = 0; // Счётчик квадратных скобок для коректного завершения массива
+    private boolean flagOfBuf = true; // флаг нужен для коректного написания запятой
+    private boolean flagOfDot = true; // флаг нужен для коректного написания чисел с плавающей точкой
     private final State state = new State(0);
 
     public ValidationResult validate(String inputStr) {
@@ -18,7 +18,7 @@ public class JsonObjectValidator {
             if (!validationSymbol())
                 return ValidationResult.unexpectedSymbol(str[position], position);
         }
-        if (flagOfCurlyBrackets && counterOfQuotes == 0 && counter == 0) {
+        if (isCurlyBrackets && counterOfQuotes == 0 && counter == 0) {
             result = ValidationResult.valid();
         } else {
             result = ValidationResult.unexpectedEOF();
@@ -30,8 +30,8 @@ public class JsonObjectValidator {
         char symbol = str[position];
         switch (state.getState()) {
             case 0:
-                if (symbol == '{' && flagOfCurlyBrackets) {
-                    flagOfCurlyBrackets = false;
+                if (symbol == '{' && isCurlyBrackets) {
+                    isCurlyBrackets = false;
                     state.setState(1);
                 } else {
                     return false;
@@ -61,8 +61,8 @@ public class JsonObjectValidator {
                 } else if (symbol == '[') {
                     counterOfSquareBrackets++;
                     state.setState(8);
-                } else if (symbol == '}' && !flagOfCurlyBrackets) {
-                    flagOfCurlyBrackets = true;
+                } else if (symbol == '}' && !isCurlyBrackets) {
+                    isCurlyBrackets = true;
                     state.setState(1);
                 } else if (!Character.isWhitespace(symbol)) {
                     return false;
@@ -130,7 +130,7 @@ public class JsonObjectValidator {
                     flagOfBuf = true;
                     state.setState(1);
                 } else if (symbol == '}') {
-                    flagOfCurlyBrackets = true;
+                    isCurlyBrackets = true;
                 } else {
                     return false;
                 }
@@ -152,8 +152,8 @@ public class JsonObjectValidator {
                 return true;
 
             case 9:
-                if (symbol == '}' && !flagOfCurlyBrackets) {
-                    flagOfCurlyBrackets = true;
+                if (symbol == '}' && !isCurlyBrackets) {
+                    isCurlyBrackets = true;
                     state.setState(1);
                 } else if (symbol == ',') {
                     flagOfBuf = true;
