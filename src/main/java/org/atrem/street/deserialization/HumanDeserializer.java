@@ -13,32 +13,26 @@ import static org.atrem.street.jsonParser.JsonParser.splitJsonArray;
 
 public class HumanDeserializer implements Deserializer<Human> {
 
-    private final PetDeserializer petDeserializer = new PetDeserializer();
-    final static List<String> requiredFields = Collections.unmodifiableList(new ArrayList<>() {{
-        add("name");
-        add("lastName");
-        add("money");
-        add("listOfPet");
-    }});
+    private final PetDeserializer pet_deserializer = new PetDeserializer();
+    final static List<String> requiredFields = List.of("name", "lastName", "money", "listOfPet");
 
     @Override
     public Human convertFromJsonObject(String jsonObj) {
-        objValidator(jsonObj);
+        validate_obj(jsonObj);
         HashMap<String, String> humanMap = getMapFromJsonObj(jsonObj);
         validateFields(humanMap);
         String name = humanMap.get("name");
         String lastName = humanMap.get("lastName");
         int money = Integer.parseInt(humanMap.get("money"));
-        List<Pet> listOfPet = petDeserializer.convertFromJsonArray(humanMap.get("listOfPet"));
+        List<Pet> listOfPet = pet_deserializer.convertFromJsonArray(humanMap.get("listOfPet"));
         Human human = new Human(name, lastName, money);
         human.addPets(listOfPet);
-
         return human;
     }
 
     @Override
     public List<Human> convertFromJsonArray(String jsonArray) {
-        arrayValidator(jsonArray);
+        validate_array(jsonArray);
         ArrayList<String> jsonHumans = splitJsonArray(jsonArray);
         ArrayList<Human> humanList = new ArrayList<>();
 

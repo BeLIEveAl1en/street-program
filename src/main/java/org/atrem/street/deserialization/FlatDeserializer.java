@@ -10,26 +10,22 @@ import static org.atrem.street.jsonParser.JsonParser.splitJsonArray;
 
 public class FlatDeserializer implements Deserializer<Flat> {
 
-    private final HumanDeserializer humanDeserializer = new HumanDeserializer();
-
-    final static List<String> requiredFields = Collections.unmodifiableList(new ArrayList<>() {{
-        add("number");
-        add("listOfHuman");
-    }});
+    private final HumanDeserializer human_deserializer = new HumanDeserializer();
+    final private static List<String> requiredFields = List.of("number", "listOfHuman");
 
     @Override
     public Flat convertFromJsonObject(String jsonObj) {
-        objValidator(jsonObj);
+        validate_obj(jsonObj);
         Map<String, String> flatMap = getMapFromJsonObj(jsonObj);
         validateFields(flatMap);
         int number = Integer.parseInt(flatMap.get("number"));
-        List<Human> humans = humanDeserializer.convertFromJsonArray(flatMap.get("listOfHuman"));
+        List<Human> humans = human_deserializer.convertFromJsonArray(flatMap.get("listOfHuman"));
         return new Flat(number, humans);
     }
 
     @Override
     public List<Flat> convertFromJsonArray(String jsonArray) {
-        arrayValidator(jsonArray);
+        validate_array(jsonArray);
         ArrayList<String> jsonFlats = splitJsonArray(jsonArray);
         ArrayList<Flat> flatList = new ArrayList<>();
 

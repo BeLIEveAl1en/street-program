@@ -3,11 +3,32 @@ package org.atrem.street.validation;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.io.FileReader;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.List;
+
 public class JsonObjectValidatorTest {
 
     private final String HUMAN_1 = "{\"name\":\"вася\",\"lastName\":\"пупкин\",\"money\":100,\"listOfPet\":[{\"name\":\"Шарик\",\"type\":\"CAT\"},{\"name\":\"Тузик\",\"type\":\"DOG\"}]}";
     private final String HUMAN_2 = "{\"name\":\"андрей\",\"lastName\":\"лукин\",\"money\":250,\"listOfPet\":[{\"name\":\"Кеша\",\"type\":\"BIRD\"}]}";
     private final String HUMAN_LIST = "[" + HUMAN_1 + "," + HUMAN_2 + "]";
+
+    private String getJSON(String file) {
+        StringBuilder expectedJSON = new StringBuilder();
+        Path path = Paths.get(file);
+        try {
+            List<String> lines = Files.readAllLines(path);
+            for (String s : lines) {
+                expectedJSON.append(s);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return expectedJSON.toString().replaceAll("\\s", "");
+    }
 
     public void shouldValidateJsonObj(String str) {
         JsonObjectValidator validator = new JsonObjectValidator();
@@ -22,7 +43,7 @@ public class JsonObjectValidatorTest {
 
         ValidationResult result = validator.validate(str);
 
-        Assertions.assertFalse(result.isValid(), "true2");
+        Assertions.assertFalse(result.isValid());
     }
 
     @Test
@@ -66,6 +87,11 @@ public class JsonObjectValidatorTest {
     }
 
     @Test
+    public void shouldValidateCurlyBrackets() {
+        shouldValidateJsonObj("{}");
+    }
+
+    @Test
     public void shouldFailValidationJsonObjWithExtraLetter() {
         shouldFailValidateJsonObj("{\"name\"f:\"Вася\"}");
     }
@@ -83,5 +109,15 @@ public class JsonObjectValidatorTest {
     @Test
     public void shouldFailValidationJsonObjWithUnexpectedEOF() {
         shouldFailValidateJsonObj("{\"name\":\"Вася\"");
+    }
+
+    @Test
+    public void should_fail_validation_when_opening_curlyBracket_missing() {
+        shouldFailValidateJsonObj("\"name\":\"toshi\"}");
+    }
+
+    @Test
+    public void should_fail_validation() {
+        shouldFailValidateJsonObj("{rorope}");
     }
 }

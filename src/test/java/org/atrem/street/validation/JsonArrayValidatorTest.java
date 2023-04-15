@@ -3,13 +3,26 @@ package org.atrem.street.validation;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.List;
+
 public class JsonArrayValidatorTest {
-
-    private final String HUMAN_1 = "{\"name\":\"вася\",\"lastName\":\"пупкин\",\"money\":100,\"listOfPet\":[{\"name\":\"Шарик\",\"type\":\"CAT\"},{\"name\":\"Тузик\",\"type\":\"DOG\"}]}";
-    private final String HUMAN_2 = "{\"name\":\"андрей\",\"lastName\":\"лукин\",\"money\":250,\"listOfPet\":[{\"name\":\"Кеша\",\"type\":\"BIRD\"}]}";
-    private final String HUMAN_LIST = "[" + HUMAN_1 + "," + HUMAN_2 + "]";
-
-    private final String FLAT_LIST = "[{\"number\": 1, \"listOfHuman\": " + HUMAN_LIST + "},{\"number\": 2, \"listOfHuman\": " + HUMAN_LIST + "}]";
+    private String getJSON(String file) {
+        StringBuilder expectedJSON = new StringBuilder();
+        Path path = Paths.get(file);
+        try {
+            List<String> lines = Files.readAllLines(path);
+            for (String s : lines) {
+                expectedJSON.append(s);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return expectedJSON.toString().replaceAll("\\s", "");
+    }
 
     public void shouldValidateJsonArray(String str) {
         JsonArrayValidator validator = new JsonArrayValidator();
@@ -24,7 +37,7 @@ public class JsonArrayValidatorTest {
 
         ValidationResult result = validator.validate(str);
 
-        Assertions.assertFalse(result.isValid(), "true");
+        Assertions.assertFalse(result.isValid());
     }
 
     @Test
@@ -34,12 +47,12 @@ public class JsonArrayValidatorTest {
 
     @Test
     public void shouldValidateHumanList() {
-        shouldValidateJsonArray(HUMAN_LIST);
+        shouldValidateJsonArray(getJSON("src\\test\\resources\\humanList.json"));
     }
 
     @Test
     public void should_validate_flat_list() {
-        shouldValidateJsonArray(FLAT_LIST);
+        shouldValidateJsonArray(getJSON("src\\test\\resources\\flatList.json"));
     }
 
     @Test
@@ -50,6 +63,16 @@ public class JsonArrayValidatorTest {
     @Test
     public void shouldValidateJsonArrayWithJSONArray() {
         shouldValidateJsonArray("[[sefpsef]]");
+    }
+
+    @Test
+    public void shouldValidateJsonArrayWithSingleDigit() {
+        shouldValidateJsonArray("[3]");
+    }
+
+    @Test
+    public void shouldValidate() {
+        shouldValidateJsonArray("[[[]]]");
     }
 
     @Test
@@ -65,5 +88,10 @@ public class JsonArrayValidatorTest {
     @Test
     public void shouldFailValidationOfJsonArrayWithMissingBracket() {
         shouldFailValidationOfJsonArray("[{}[]");
+    }
+
+    @Test
+    public void shouldFailValidationWithoutBracket() {
+        shouldFailValidationOfJsonArray("psdf]");
     }
 }

@@ -42,8 +42,6 @@ public class JsonParser {
                     break;
 
                 case ENTRY_VALUE_AND_KEY:
-                    if (i == arg.length() - 1 && element != '}' && element != '"')
-                        value.append(element);
                     map.put(key.toString().strip(), value.toString().strip());
                     key.setLength(0);
                     value.setLength(0);

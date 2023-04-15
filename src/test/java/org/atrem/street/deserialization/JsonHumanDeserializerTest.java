@@ -8,32 +8,36 @@ import org.junit.jupiter.api.Test;
 
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
 public class JsonHumanDeserializerTest {
-    private final HumanDeserializer HUMAN_DESERIALIZER = new HumanDeserializer();
+    private final HumanDeserializer human_deserializer = new HumanDeserializer();
 
     private String getJSON(String file) {
-        String expectedJSON = "";
-        try (FileReader reader = new FileReader(file)) {
-            int symbol;
-            while ((symbol = reader.read()) != -1) {
-                expectedJSON += (char) symbol;
+        StringBuilder expectedJSON = new StringBuilder();
+        Path path = Paths.get(file);
+        try {
+            List<String> lines = Files.readAllLines(path);
+            for (String s : lines) {
+                expectedJSON.append(s);
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return expectedJSON.replaceAll("\\s", "");
+        return expectedJSON.toString().replaceAll("\\s", "");
     }
 
     @Test
     public void shouldDeserializeHumanObj() {
-        String serializedHuman = getJSON("C:\\java\\programs\\street-program\\src\\test\\resources\\human.json");
+        String serializedHuman = getJSON("src\\test\\resources\\human.json");
         Human expectedHuman = new Human("вася", "пупкин", 100);
         expectedHuman.getListOfPet().add(new Pet("Шарик", AnimalType.CAT));
         expectedHuman.getListOfPet().add(new Pet("Тузик", AnimalType.DOG));
-        Human actualHuman = HUMAN_DESERIALIZER.convertFromJsonObject(serializedHuman);
+        Human actualHuman = human_deserializer.convertFromJsonObject(serializedHuman);
         Assertions.assertEquals(expectedHuman, actualHuman);
     }
 
@@ -47,7 +51,7 @@ public class JsonHumanDeserializerTest {
         human2.getListOfPet().add(new Pet("Кеша", AnimalType.BIRD));
         humansList.add(human1);
         humansList.add(human2);
-        List<Human> humanDeserializer = HUMAN_DESERIALIZER.convertFromJsonArray(getJSON("C:\\java\\programs\\street-program\\src\\test\\resources\\humanList.json"));
+        List<Human> humanDeserializer = human_deserializer.convertFromJsonArray(getJSON("src\\test\\resources\\humanList.json"));
         Assertions.assertEquals(humansList, humanDeserializer);
     }
 }

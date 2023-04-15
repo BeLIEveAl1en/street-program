@@ -11,23 +11,27 @@ import org.junit.platform.commons.util.StringUtils;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
 public class JsonFlatSerializerTest {
     private final FlatSerializer FLAT_SERIALIZER = new FlatSerializer();
 
-    private String getExpectedJSON(String file) {
-        String expectedJSON = "";
-        try (FileReader reader = new FileReader(file)) {
-            int symbol;
-            while ((symbol = reader.read()) != -1) {
-                expectedJSON += (char) symbol;
+    private String getJSON(String file) {
+        StringBuilder expectedJSON = new StringBuilder();
+        Path path = Paths.get(file);
+        try {
+            List<String> lines = Files.readAllLines(path);
+            for (String s : lines) {
+                expectedJSON.append(s);
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return expectedJSON.replaceAll("\\s", "");
+        return expectedJSON.toString().replaceAll("\\s", "");
     }
 
     private List<Human> mockHumanList() {
@@ -57,13 +61,13 @@ public class JsonFlatSerializerTest {
         List<Human> people = mockHumanList();
         Flat flat = new Flat(1, people);
         String jsonFlat = FLAT_SERIALIZER.toJsonObject(flat);
-        Assertions.assertEquals(getExpectedJSON("C:\\java\\programs\\street-program\\src\\test\\resources\\flat.json"), jsonFlat);
+        Assertions.assertEquals(getJSON("C:\\java\\programs\\street-program\\src\\test\\resources\\flat.json"), jsonFlat);
     }
 
     @Test
     public void shouldSerializeFlatList() {
         List<Flat> flats = mockFlatList();
         String jsonFlat = FLAT_SERIALIZER.toJsonArray(flats);
-        Assertions.assertEquals(getExpectedJSON("C:\\java\\programs\\street-program\\src\\test\\resources\\flatList.json"), jsonFlat);
+        Assertions.assertEquals(getJSON("C:\\java\\programs\\street-program\\src\\test\\resources\\flatList.json"), jsonFlat);
     }
 }

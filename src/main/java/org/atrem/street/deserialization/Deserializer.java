@@ -15,7 +15,7 @@ public interface Deserializer<T> {
 
     List<T> convertFromJsonArray(String jsonArray);
 
-    default void objValidator(String obj) {
+    default void validate_obj(String obj) {
         JsonObjectValidator jsonObjectValidator = new JsonObjectValidator();
 
         ValidationResult result = jsonObjectValidator.validate(obj);
@@ -24,7 +24,7 @@ public interface Deserializer<T> {
         }
     }
 
-    default void arrayValidator(String array) {
+    default void validate_array(String array) {
         JsonArrayValidator jsonArrayValidator = new JsonArrayValidator();
 
         ValidationResult result = jsonArrayValidator.validate(array);
@@ -36,18 +36,8 @@ public interface Deserializer<T> {
     List<String> getRequiredFields();
 
     default void validateFields(Map<String, String> map) {
-        boolean flag = true;
-        for (int i = 0; i < getRequiredFields().size(); i++) {
-            for (int j = 0; j < getRequiredFields().size(); j++) {
-                if (!Objects.equals(map.keySet().toArray()[i], getRequiredFields().get(j)))
-                    flag = false;
-                else {
-                    flag = true;
-                    break;
-                }
-            }
-            if (!flag)
-                throw new IllegalStateException();
+        if (!map.keySet().containsAll(getRequiredFields())) {
+            throw new IllegalStateException();
         }
     }
 }

@@ -7,30 +7,36 @@ import org.atrem.street.entities.Pet;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.io.FileReader;
+import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
+import static java.nio.charset.StandardCharsets.UTF_8;
+
 public class JsonFlatDeserializerTest {
-    private final FlatDeserializer FLAT_DESERIALIZER = new FlatDeserializer();
+    private final FlatDeserializer flat_deserializer = new FlatDeserializer();
 
     private String getJSON(String file) {
-        String expectedJSON = "";
-        try (FileReader reader = new FileReader(file)) {
-            int symbol;
-            while ((symbol = reader.read()) != -1) {
-                expectedJSON += (char) symbol;
+        StringBuilder expectedJSON = new StringBuilder();
+        Path path = Paths.get(file);
+        try {
+            List<String> lines = Files.readAllLines(path);
+            for (String s : lines) {
+                expectedJSON.append(s);
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return expectedJSON.replaceAll("\\s", "");
+        return expectedJSON.toString().replaceAll("\\s", "");
     }
 
     @Test
     public void shouldDeserializeFlatObj() {
-        String serializedFlat = getJSON("C:\\java\\programs\\street-program\\src\\test\\resources\\flat.json");
+        String serializedFlat = getJSON("src\\test\\resources\\flat.json");
         List<Human> humansList = new ArrayList<>();
         Human human1 = new Human("вася", "пупкин", 100);
         Human human2 = new Human("андрей", "лукин", 250);
@@ -40,7 +46,7 @@ public class JsonFlatDeserializerTest {
         humansList.add(human1);
         humansList.add(human2);
         Flat expectedFlat = new Flat(1, humansList);
-        Flat actualFlat = FLAT_DESERIALIZER.convertFromJsonObject(serializedFlat);
+        Flat actualFlat = flat_deserializer.convertFromJsonObject(serializedFlat);
         Assertions.assertEquals(expectedFlat, actualFlat);
     }
 
@@ -57,7 +63,7 @@ public class JsonFlatDeserializerTest {
         humansList.add(human2);
         expectedFlats.add(new Flat(1, humansList));
         expectedFlats.add(new Flat(2, humansList));
-        List<Flat> actualFlats = FLAT_DESERIALIZER.convertFromJsonArray(getJSON("C:\\java\\programs\\street-program\\src\\test\\resources\\flatList.json"));
+        List<Flat> actualFlats = flat_deserializer.convertFromJsonArray(getJSON("src\\test\\resources\\flatList.json"));
         Assertions.assertEquals(expectedFlats, actualFlats);
     }
 }

@@ -19,7 +19,7 @@ public class PetDeserializer implements Deserializer<Pet> {
 
     @Override
     public Pet convertFromJsonObject(String jsonObj) {
-        objValidator(jsonObj);
+        validate_obj(jsonObj);
         HashMap<String, String> petMap = getMapFromJsonObj(jsonObj);
         validateFields(petMap);
         String name = petMap.get("name");
@@ -30,7 +30,7 @@ public class PetDeserializer implements Deserializer<Pet> {
 
     @Override
     public List<Pet> convertFromJsonArray(String jsonArray) {
-        arrayValidator(jsonArray);
+        validate_array(jsonArray);
         ArrayList<String> jsonPets = splitJsonArray(jsonArray);
         ArrayList<Pet> petList = new ArrayList<>();
 

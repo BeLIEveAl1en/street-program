@@ -8,30 +8,34 @@ import org.junit.jupiter.api.Test;
 
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
 public class JsonHumanSerializerTest {
     private final HumanSerializer HUMAN_SERIALIZER = new HumanSerializer();
 
-    private String getExpectedJSON(String file) {
-        String expectedJSON = "";
-        try (FileReader reader = new FileReader(file)) {
-            int symbol;
-            while ((symbol = reader.read()) != -1) {
-                expectedJSON += (char) symbol;
+    private String getJSON(String file) {
+        StringBuilder expectedJSON = new StringBuilder();
+        Path path = Paths.get(file);
+        try {
+            List<String> lines = Files.readAllLines(path);
+            for (String s : lines) {
+                expectedJSON.append(s);
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return expectedJSON.replaceAll("\\s", "");
+        return expectedJSON.toString().replaceAll("\\s", "");
     }
 
     @Test
     public void shouldSerializeHumanList() {
         List<Human> people = mockHumanList();
         String jsonHuman = HUMAN_SERIALIZER.toJsonArray(people);
-        Assertions.assertEquals(getExpectedJSON("C:\\java\\programs\\street-program\\src\\test\\resources\\humanList.json"), jsonHuman);
+        Assertions.assertEquals(getJSON("C:\\java\\programs\\street-program\\src\\test\\resources\\humanList.json"), jsonHuman);
     }
 
     @Test
@@ -40,7 +44,7 @@ public class JsonHumanSerializerTest {
         human1.getListOfPet().add(new Pet("Шарик", AnimalType.CAT));
         human1.getListOfPet().add(new Pet("Тузик", AnimalType.DOG));
         String jsonHuman = HUMAN_SERIALIZER.toJsonObject(human1);
-        Assertions.assertEquals(getExpectedJSON("C:\\java\\programs\\street-program\\src\\test\\resources\\human.json"), jsonHuman);
+        Assertions.assertEquals(getJSON("C:\\java\\programs\\street-program\\src\\test\\resources\\human.json"), jsonHuman);
     }
 
     private List<Human> mockHumanList() {

@@ -33,7 +33,6 @@ public class JsonPaserTest {
         Assertions.assertEquals(expected, result);
     }
 
-
     //Code doesn't work with plain elements
     /*
     @Test
@@ -47,7 +46,8 @@ public class JsonPaserTest {
         ArrayList<String> result = JsonParser.splitJsonArray("[\"number\", 1, true, null]");
 
         Assertions.assertEquals(expected, result);
-    }*/
+    }
+    */
 
     @Test
     public void should_return_empty_array_parse_with_extra_quote() {
@@ -61,7 +61,8 @@ public class JsonPaserTest {
         map.put("name", "false");
         map.put("age", "19");
         map.put("lastName", "None");
-        should_parse_jsonObj("{\"name\":false, \"age\":19, \"lastName\":\"None\"}");
+        should_parse_jsonObj("{\"name\":false, \"age\":19, \"lastName\":None}");
+        map.clear();
     }
 
     @Test
@@ -69,6 +70,7 @@ public class JsonPaserTest {
         map.put("name", "вася");
         map.put("listOfPet", "[{\"name\":\"Шарик\",\"type\":\"CAT\"},{\"name\":\"Тузик\",\"type\":\"DOG\"}]");
         should_parse_jsonObj("{\"name\":\"вася\",\"listOfPet\":[{\"name\":\"Шарик\",\"type\":\"CAT\"},{\"name\":\"Тузик\",\"type\":\"DOG\"}]}");
+        map.clear();
     }
 
     @Test
@@ -76,5 +78,6 @@ public class JsonPaserTest {
         map.put("name", "вася");
         map.put("listOfPet", "[{\"name\":\"Шарик\",\"type\":\"CAT\"},{\"name\":\"Тузик\",\"type\":\"DOG\"}]");
         should_fail_parse_jsonObj("{\"name\":\"вася\",\"listOfPet\":[{\"name\":\"Шарик\",\"type\":\"CAT\"},{\"name\":\"Тузик\",\"type\":\"DOG\"}]");
+        map.clear();
     }
 }

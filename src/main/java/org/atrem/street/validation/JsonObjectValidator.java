@@ -158,7 +158,7 @@ public class JsonObjectValidator {
                 } else if (symbol == ',') {
                     flagOfBuf = true;
                     state.setState(1);
-                } else if (!Character.isWhitespace(symbol)) {
+                } else {
                     return false;
                 }
                 return true;

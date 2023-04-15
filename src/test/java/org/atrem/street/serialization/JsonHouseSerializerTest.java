@@ -6,23 +6,27 @@ import org.junit.jupiter.api.Test;
 
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
 public class JsonHouseSerializerTest {
     private final HouseSerializer HOUSE_SERIALIZER = new HouseSerializer();
 
-    private String getExpectedJSON(String file) {
-        String expectedJSON = "";
-        try (FileReader reader = new FileReader(file)) {
-            int symbol;
-            while ((symbol = reader.read()) != -1) {
-                expectedJSON += (char) symbol;
+    private String getJSON(String file) {
+        StringBuilder expectedJSON = new StringBuilder();
+        Path path = Paths.get(file);
+        try {
+            List<String> lines = Files.readAllLines(path);
+            for (String s : lines) {
+                expectedJSON.append(s);
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return expectedJSON.replaceAll("\\s", "");
+        return expectedJSON.toString().replaceAll("\\s", "");
     }
 
     private List<Human> mockHumanList() {
@@ -52,7 +56,7 @@ public class JsonHouseSerializerTest {
         List<Flat> flats = mockFlatList();
         House house = new House(1, flats);
         String jsonHouse = HOUSE_SERIALIZER.toJsonObject(house);
-        Assertions.assertEquals(getExpectedJSON("C:\\java\\programs\\street-program\\src\\test\\resources\\house.json"), jsonHouse);
+        Assertions.assertEquals(getJSON("C:\\java\\programs\\street-program\\src\\test\\resources\\house.json"), jsonHouse);
     }
 
     @Test
@@ -64,6 +68,6 @@ public class JsonHouseSerializerTest {
         houses.add(house1);
         houses.add(house2);
         String jsonHouse = HOUSE_SERIALIZER.toJsonArray(houses);
-        Assertions.assertEquals(getExpectedJSON("C:\\java\\programs\\street-program\\src\\test\\resources\\houseList.json"), jsonHouse);
+        Assertions.assertEquals(getJSON("C:\\java\\programs\\street-program\\src\\test\\resources\\houseList.json"), jsonHouse);
     }
 }
