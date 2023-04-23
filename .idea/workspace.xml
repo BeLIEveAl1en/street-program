@@ -4,32 +4,23 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b8a3cbba-6c43-4ee7-b39b-9651b394e574" name="Default Changelist" comment="rework test">
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="b8a3cbba-6c43-4ee7-b39b-9651b394e574" name="Default Changelist" comment="small fix">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/atrem/street/deserialization/Deserializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/atrem/street/deserialization/Deserializer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/atrem/street/deserialization/FlatDeserializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/atrem/street/deserialization/FlatDeserializer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/atrem/street/deserialization/HouseDeserializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/atrem/street/deserialization/HouseDeserializer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/atrem/street/deserialization/HumanDeserializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/atrem/street/deserialization/HumanDeserializer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/atrem/street/deserialization/PetDeserializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/atrem/street/deserialization/PetDeserializer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/atrem/street/jsonParser/JsonParser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/atrem/street/jsonParser/JsonParser.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/atrem/street/serialization/FlatSerializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/atrem/street/serialization/FlatSerializer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/atrem/street/serialization/HouseSerializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/atrem/street/serialization/HouseSerializer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/atrem/street/serialization/HumanSerializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/atrem/street/serialization/HumanSerializer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/atrem/street/serialization/PetSerializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/atrem/street/serialization/PetSerializer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/atrem/street/validation/JsonObjectValidator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/atrem/street/validation/JsonObjectValidator.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/org/atrem/street/deserialization/JsonFlatDeserializerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/org/atrem/street/deserialization/JsonFlatDeserializerTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/org/atrem/street/deserialization/JsonHouseDeserializerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/org/atrem/street/deserialization/JsonHouseDeserializerTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/org/atrem/street/deserialization/JsonHumanDeserializerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/org/atrem/street/deserialization/JsonHumanDeserializerTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/org/atrem/street/deserialization/JsonPetDeserializerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/org/atrem/street/deserialization/JsonPetDeserializerTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/org/atrem/street/jsonParser/JsonPaserTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/org/atrem/street/jsonParser/JsonPaserTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/org/atrem/street/serialization/JsonFlatSerializerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/org/atrem/street/serialization/JsonFlatSerializerTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/org/atrem/street/serialization/JsonHouseSerializerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/org/atrem/street/serialization/JsonHouseSerializerTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/org/atrem/street/serialization/JsonHumanSerializerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/org/atrem/street/serialization/JsonHumanSerializerTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/org/atrem/street/serialization/JsonPetSerializerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/org/atrem/street/serialization/JsonPetSerializerTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/org/atrem/street/validation/JsonArrayValidatorTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/org/atrem/street/validation/JsonArrayValidatorTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/org/atrem/street/validation/JsonObjectValidatorTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/org/atrem/street/validation/JsonObjectValidatorTest.java" afterDir="false" />
     </list>
     <list id="6bf90c95-2b25-490a-b1b8-e5f6b08b787c" name="Changes by Артем" comment="Change serializers" />
     <option name="SHOW_DIALOG" value="false" />
@@ -90,7 +81,7 @@
       <recent name="org.atrem.street.deserialization" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.JsonArrayValidatorTest">
+  <component name="RunManager" selected="JUnit.JsonPetSerializerTest">
     <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
@@ -102,91 +93,88 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="JsonArrayValidatorTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="JsonFlatSerializerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="street-program-master" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="org.atrem.street.validation.*" />
+          <option name="PATTERN" value="org.atrem.street.serialization.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="org.atrem.street.validation" />
-      <option name="MAIN_CLASS_NAME" value="org.atrem.street.validation.JsonArrayValidatorTest" />
+      <option name="PACKAGE_NAME" value="org.atrem.street.serialization" />
+      <option name="MAIN_CLASS_NAME" value="org.atrem.street.serialization.JsonFlatSerializerTest" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="JsonArrayValidatorTest.shouldValidate" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="JsonHouseSerializerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="street-program-master" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="org.atrem.street.validation.*" />
+          <option name="PATTERN" value="org.atrem.street.serialization.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="org.atrem.street.validation" />
-      <option name="MAIN_CLASS_NAME" value="org.atrem.street.validation.JsonArrayValidatorTest" />
-      <option name="METHOD_NAME" value="shouldValidate" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="JsonObjectValidatorTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="street-program-master" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="org.atrem.street.validation.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="org.atrem.street.validation" />
-      <option name="MAIN_CLASS_NAME" value="org.atrem.street.validation.JsonObjectValidatorTest" />
+      <option name="PACKAGE_NAME" value="org.atrem.street.serialization" />
+      <option name="MAIN_CLASS_NAME" value="org.atrem.street.serialization.JsonHouseSerializerTest" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="JsonObjectValidatorTest.s" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="JsonHumanSerializerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="street-program-master" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="org.atrem.street.validation.*" />
+          <option name="PATTERN" value="org.atrem.street.serialization.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="org.atrem.street.validation" />
-      <option name="MAIN_CLASS_NAME" value="org.atrem.street.validation.JsonObjectValidatorTest" />
-      <option name="METHOD_NAME" value="s" />
-      <option name="TEST_OBJECT" value="method" />
+      <option name="PACKAGE_NAME" value="org.atrem.street.serialization" />
+      <option name="MAIN_CLASS_NAME" value="org.atrem.street.serialization.JsonHumanSerializerTest" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="JsonObjectValidatorTest.shouldValidateCurlyBrackets" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="JsonPetDeserializerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="street-program-master" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="org.atrem.street.validation.*" />
+          <option name="PATTERN" value="org.atrem.street.deserialization.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="org.atrem.street.validation" />
-      <option name="MAIN_CLASS_NAME" value="org.atrem.street.validation.JsonObjectValidatorTest" />
-      <option name="METHOD_NAME" value="shouldValidateCurlyBrackets" />
-      <option name="TEST_OBJECT" value="method" />
+      <option name="PACKAGE_NAME" value="org.atrem.street.deserialization" />
+      <option name="MAIN_CLASS_NAME" value="org.atrem.street.deserialization.JsonPetDeserializerTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="JsonPetSerializerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="street-program-master" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.atrem.street.serialization.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="org.atrem.street.serialization" />
+      <option name="MAIN_CLASS_NAME" value="org.atrem.street.serialization.JsonPetSerializerTest" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.JsonArrayValidatorTest" />
-        <item itemvalue="JUnit.JsonArrayValidatorTest.shouldValidate" />
-        <item itemvalue="JUnit.JsonObjectValidatorTest" />
-        <item itemvalue="JUnit.JsonObjectValidatorTest.shouldValidateCurlyBrackets" />
-        <item itemvalue="JUnit.JsonObjectValidatorTest.s" />
+        <item itemvalue="JUnit.JsonPetSerializerTest" />
+        <item itemvalue="JUnit.JsonHumanSerializerTest" />
+        <item itemvalue="JUnit.JsonHouseSerializerTest" />
+        <item itemvalue="JUnit.JsonFlatSerializerTest" />
+        <item itemvalue="JUnit.JsonPetDeserializerTest" />
       </list>
     </recent_temporary>
   </component>
@@ -293,7 +281,14 @@
       <option name="project" value="LOCAL" />
       <updated>1673819870342</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="small fix">
+      <created>1681597640414</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1681597640414</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -318,7 +313,8 @@
     <MESSAGE value="-completed deserializers" />
     <MESSAGE value="rework deserializer" />
     <MESSAGE value="rework test" />
-    <option name="LAST_COMMIT_MESSAGE" value="rework test" />
+    <MESSAGE value="small fix" />
+    <option name="LAST_COMMIT_MESSAGE" value="small fix" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

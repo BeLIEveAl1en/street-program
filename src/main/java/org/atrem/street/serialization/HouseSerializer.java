@@ -7,11 +7,12 @@ import java.util.List;
 
 public class HouseSerializer implements Serializer<House> {
 
-    private final FlatSerializer flat_serializer = new FlatSerializer();
+    private final FlatSerializer FlAT_DESERIALIZER = new FlatSerializer();
+    private final String FORMAT_STRING = "{\"number\":%s,\"listOfFlat\":%s}";
 
     @Override
     public String toJsonObject(House obj) {
-        return "{\"number\":" + obj.getNumber() + ",\"listOfFlat\":" + flat_serializer.toJsonArray(obj.getListOfFlats()) + "}";
+        return String.format(FORMAT_STRING, obj.getNumber(), FlAT_DESERIALIZER.toJsonArray(obj.getListOfFlats()));
     }
 
     @Override
@@ -22,9 +23,9 @@ public class HouseSerializer implements Serializer<House> {
         }
         jsonArray.append("[");
         for (House house : array) {
-            jsonArray.append(toJsonObject(house)).append(", ");
+            jsonArray.append(toJsonObject(house)).append(",");
         }
-        jsonArray.delete(jsonArray.length() - 2, jsonArray.length());
+        jsonArray.delete(jsonArray.length() - 1, jsonArray.length());
         jsonArray.append("]");
 
         return jsonArray.toString().replaceAll("\\s", "");

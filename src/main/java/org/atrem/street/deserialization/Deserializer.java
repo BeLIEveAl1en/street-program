@@ -15,7 +15,7 @@ public interface Deserializer<T> {
 
     List<T> convertFromJsonArray(String jsonArray);
 
-    default void validate_obj(String obj) {
+    default void validateObj(String obj) {
         JsonObjectValidator jsonObjectValidator = new JsonObjectValidator();
 
         ValidationResult result = jsonObjectValidator.validate(obj);
@@ -24,7 +24,7 @@ public interface Deserializer<T> {
         }
     }
 
-    default void validate_array(String array) {
+    default void validateArray(String array) {
         JsonArrayValidator jsonArrayValidator = new JsonArrayValidator();
 
         ValidationResult result = jsonArrayValidator.validate(array);

@@ -7,9 +7,11 @@ import java.util.List;
 
 public class PetSerializer implements Serializer<Pet> {
 
+    private final String FORMAT_STRING = "{\"name\":" + "\"%s\",\"type\":" + "\"%s\"}";
+
     @Override
     public String toJsonObject(Pet pet) {
-        return "{\"name\":" + "\"" + pet.getName() + "\",\"type\":" + "\"" + pet.getType().name() + "\"}";
+        return String.format(FORMAT_STRING, pet.getName(), pet.getType().name());
     }
 
     @Override
@@ -20,9 +22,9 @@ public class PetSerializer implements Serializer<Pet> {
         }
         jsonArray.append("[");
         for (Pet pet : array) {
-            jsonArray.append(toJsonObject(pet)).append(", ");
+            jsonArray.append(toJsonObject(pet)).append(",");
         }
-        jsonArray.delete(jsonArray.length() - 2, jsonArray.length());
+        jsonArray.delete(jsonArray.length() - 1, jsonArray.length());
         jsonArray.append("]");
 
         return jsonArray.toString().replaceAll("\\s", "");

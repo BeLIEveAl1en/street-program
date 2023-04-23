@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class JsonHumanDeserializerTest {
-    private final HumanDeserializer human_deserializer = new HumanDeserializer();
+    private final HumanDeserializer HUMAN_DESERIALIZER = new HumanDeserializer();
 
     private String getJSON(String file) {
         StringBuilder expectedJSON = new StringBuilder();
@@ -37,7 +37,7 @@ public class JsonHumanDeserializerTest {
         Human expectedHuman = new Human("вася", "пупкин", 100);
         expectedHuman.getListOfPet().add(new Pet("Шарик", AnimalType.CAT));
         expectedHuman.getListOfPet().add(new Pet("Тузик", AnimalType.DOG));
-        Human actualHuman = human_deserializer.convertFromJsonObject(serializedHuman);
+        Human actualHuman = HUMAN_DESERIALIZER.convertFromJsonObject(serializedHuman);
         Assertions.assertEquals(expectedHuman, actualHuman);
     }
 
@@ -51,7 +51,7 @@ public class JsonHumanDeserializerTest {
         human2.getListOfPet().add(new Pet("Кеша", AnimalType.BIRD));
         humansList.add(human1);
         humansList.add(human2);
-        List<Human> humanDeserializer = human_deserializer.convertFromJsonArray(getJSON("src\\test\\resources\\humanList.json"));
+        List<Human> humanDeserializer = HUMAN_DESERIALIZER.convertFromJsonArray(getJSON("src\\test\\resources\\humanList.json"));
         Assertions.assertEquals(humansList, humanDeserializer);
     }
 }

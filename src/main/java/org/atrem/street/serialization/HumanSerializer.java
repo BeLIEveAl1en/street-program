@@ -6,11 +6,13 @@ import java.util.List;
 
 public class HumanSerializer implements Serializer<Human> {
 
-    private final PetSerializer pet_serializer = new PetSerializer();
+    private final PetSerializer PET_DESERIALIZER = new PetSerializer();
+    private final String FORMAT_STRING = "{\"name\":" + "\"%s\",\"lastName\":" + "\"%s\",\"money\":%s,\"listOfPet\":%s}";
+
 
     @Override
     public String toJsonObject(Human obj) {
-        return "{\"name\":" + "\"" + obj.getName() + "\",\"lastName\":" + "\"" + obj.getLastName() + "\",\"money\":" + obj.getMoney() + ",\"listOfPet\":" + pet_serializer.toJsonArray(obj.getListOfPet()) + "}";
+        return String.format(FORMAT_STRING, obj.getName(), obj.getLastName(), obj.getMoney(), PET_DESERIALIZER.toJsonArray(obj.getListOfPet()));
     }
 
     @Override
@@ -21,9 +23,9 @@ public class HumanSerializer implements Serializer<Human> {
         }
         jsonArray.append("[");
         for (Human human : array) {
-            jsonArray.append(toJsonObject(human)).append(", ");
+            jsonArray.append(toJsonObject(human)).append(",");
         }
-        jsonArray.delete(jsonArray.length() - 2, jsonArray.length());
+        jsonArray.delete(jsonArray.length() - 1, jsonArray.length());
         jsonArray.append("]");
 
         return jsonArray.toString().replaceAll("\\s", "");

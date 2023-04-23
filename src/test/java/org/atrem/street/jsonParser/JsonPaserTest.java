@@ -33,22 +33,6 @@ public class JsonPaserTest {
         Assertions.assertEquals(expected, result);
     }
 
-    //Code doesn't work with plain elements
-    /*
-    @Test
-    public void should_parse_when_all_elements_are_plain() {
-        ArrayList<String> expected = new ArrayList<>();
-        expected.add("\"number\"");
-        expected.add("1");
-        expected.add("true");
-        expected.add("null");
-
-        ArrayList<String> result = JsonParser.splitJsonArray("[\"number\", 1, true, null]");
-
-        Assertions.assertEquals(expected, result);
-    }
-    */
-
     @Test
     public void should_return_empty_array_parse_with_extra_quote() {
         ArrayList<String> result = JsonParser.splitJsonArray("[\"27\"\"]");

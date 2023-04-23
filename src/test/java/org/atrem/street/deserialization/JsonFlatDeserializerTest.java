@@ -18,7 +18,7 @@ import java.util.List;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
 public class JsonFlatDeserializerTest {
-    private final FlatDeserializer flat_deserializer = new FlatDeserializer();
+    private final FlatDeserializer FlAT_DESERIALIZER = new FlatDeserializer();
 
     private String getJSON(String file) {
         StringBuilder expectedJSON = new StringBuilder();
@@ -46,7 +46,7 @@ public class JsonFlatDeserializerTest {
         humansList.add(human1);
         humansList.add(human2);
         Flat expectedFlat = new Flat(1, humansList);
-        Flat actualFlat = flat_deserializer.convertFromJsonObject(serializedFlat);
+        Flat actualFlat = FlAT_DESERIALIZER.convertFromJsonObject(serializedFlat);
         Assertions.assertEquals(expectedFlat, actualFlat);
     }
 
@@ -63,7 +63,7 @@ public class JsonFlatDeserializerTest {
         humansList.add(human2);
         expectedFlats.add(new Flat(1, humansList));
         expectedFlats.add(new Flat(2, humansList));
-        List<Flat> actualFlats = flat_deserializer.convertFromJsonArray(getJSON("src\\test\\resources\\flatList.json"));
+        List<Flat> actualFlats = FlAT_DESERIALIZER.convertFromJsonArray(getJSON("src\\test\\resources\\flatList.json"));
         Assertions.assertEquals(expectedFlats, actualFlats);
     }
 }

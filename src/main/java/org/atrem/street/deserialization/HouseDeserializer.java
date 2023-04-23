@@ -10,23 +10,23 @@ import static org.atrem.street.jsonParser.JsonParser.splitJsonArray;
 
 public class HouseDeserializer implements Deserializer {
 
-    private final FlatDeserializer flat_deserializer = new FlatDeserializer();
+    private final FlatDeserializer FlAT_DESERIALIZER = new FlatDeserializer();
 
     final static List<String> requiredFields = List.of("number", "listOfFlat");
 
     @Override
     public House convertFromJsonObject(String jsonObj) {
-        validate_obj(jsonObj);
+        validateObj(jsonObj);
         Map<String, String> houseMap = getMapFromJsonObj(jsonObj);
         validateFields(houseMap);
         int number = Integer.parseInt(houseMap.get("number"));
-        List<Flat> flats = flat_deserializer.convertFromJsonArray(houseMap.get("listOfFlat"));
+        List<Flat> flats = FlAT_DESERIALIZER.convertFromJsonArray(houseMap.get("listOfFlat"));
         return new House(number, flats);
     }
 
     @Override
     public List<House> convertFromJsonArray(String jsonArray) {
-        validate_array(jsonArray);
+        validateArray(jsonArray);
         ArrayList<String> jsonHouses = splitJsonArray(jsonArray);
         ArrayList<House> houseList = new ArrayList<>();
         for (String jsonHuman : jsonHouses) {

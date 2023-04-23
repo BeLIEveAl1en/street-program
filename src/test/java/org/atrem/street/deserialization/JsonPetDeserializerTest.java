@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class JsonPetDeserializerTest {
-    private final PetDeserializer pet_deserializer = new PetDeserializer();
+    private final PetDeserializer PET_DESERIALIZER = new PetDeserializer();
 
     private String getJSON(String file) {
         StringBuilder expectedJSON = new StringBuilder();
@@ -34,7 +34,7 @@ public class JsonPetDeserializerTest {
     public void shouldDeserializePetObj() {
         String serializedPet = getJSON("src\\test\\resources\\pet.json");
         Pet expectedPet = new Pet("толя", AnimalType.CAT);
-        Pet actualPet = pet_deserializer.convertFromJsonObject(serializedPet);
+        Pet actualPet = PET_DESERIALIZER.convertFromJsonObject(serializedPet);
         Assertions.assertEquals(expectedPet, actualPet);
     }
 
@@ -45,7 +45,7 @@ public class JsonPetDeserializerTest {
         petList.add(new Pet("толя", AnimalType.CAT));
         petList.add(new Pet("шарик", AnimalType.DOG));
         petList.add(new Pet("куку", AnimalType.BIRD));
-        List<Pet> petDeserializer = pet_deserializer.convertFromJsonArray(serializedPetArray);
+        List<Pet> petDeserializer = PET_DESERIALIZER.convertFromJsonArray(serializedPetArray);
         Assertions.assertEquals(petList, petDeserializer);
     }
 }

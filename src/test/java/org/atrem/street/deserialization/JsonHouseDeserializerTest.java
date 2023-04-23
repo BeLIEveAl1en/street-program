@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class JsonHouseDeserializerTest {
-    private final HouseDeserializer house_deserializer = new HouseDeserializer();
+    private final HouseDeserializer HOUSE_DESERIALIZER = new HouseDeserializer();
 
     private String getJSON(String file) {
         StringBuilder expectedJSON = new StringBuilder();
@@ -44,7 +44,7 @@ public class JsonHouseDeserializerTest {
         flats.add(new Flat(1, humansList));
         flats.add(new Flat(2, humansList));
         House expectedHouse = new House(1, flats);
-        House actualHouse = house_deserializer.convertFromJsonObject(serializedFlat);
+        House actualHouse = HOUSE_DESERIALIZER.convertFromJsonObject(serializedFlat);
         Assertions.assertEquals(expectedHouse, actualHouse);
     }
 
@@ -64,7 +64,7 @@ public class JsonHouseDeserializerTest {
         flatList.add(new Flat(2, humansList));
         expectedHousesList.add(new House(1, flatList));
         expectedHousesList.add(new House(2, flatList));
-        List<House> actualHouses = house_deserializer.convertFromJsonArray(getJSON("src\\test\\resources\\houseList.json"));
+        List<House> actualHouses = HOUSE_DESERIALIZER.convertFromJsonArray(getJSON("src\\test\\resources\\houseList.json"));
         Assertions.assertEquals(expectedHousesList, actualHouses);
     }
 }
