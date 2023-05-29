@@ -10,8 +10,8 @@ import static org.atrem.street.jsonParser.JsonParser.splitJsonArray;
 
 public class FlatDeserializer implements Deserializer<Flat> {
 
-    private final HumanDeserializer HUMAN_DESERIALIZER = new HumanDeserializer();
-    final private static List<String> requiredFields = List.of("number", "listOfHuman");
+    private static final HumanDeserializer HUMAN_DESERIALIZER = new HumanDeserializer();
+    private static final List<String> requiredFields = List.of("number", "listOfHuman");
 
     @Override
     public Flat convertFromJsonObject(String jsonObj) {

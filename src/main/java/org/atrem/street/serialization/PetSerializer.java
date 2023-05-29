@@ -7,11 +7,11 @@ import java.util.List;
 
 public class PetSerializer implements Serializer<Pet> {
 
-    private final String FORMAT_STRING = "{\"name\":" + "\"%s\",\"type\":" + "\"%s\"}";
+    private static final String PET_TEMPLATE = "{\"name\":" + "\"%s\",\"type\":" + "\"%s\"}";
 
     @Override
     public String toJsonObject(Pet pet) {
-        return String.format(FORMAT_STRING, pet.getName(), pet.getType().name());
+        return String.format(PET_TEMPLATE, pet.getName(), pet.getType().name());
     }
 
     @Override

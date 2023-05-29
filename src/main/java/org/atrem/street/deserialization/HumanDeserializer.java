@@ -13,8 +13,8 @@ import static org.atrem.street.jsonParser.JsonParser.splitJsonArray;
 
 public class HumanDeserializer implements Deserializer<Human> {
 
-    private final PetDeserializer PET_DESERIALIZER = new PetDeserializer();
-    final static List<String> requiredFields = List.of("name", "lastName", "money", "listOfPet");
+    private static final PetDeserializer PET_DESERIALIZER = new PetDeserializer();
+    private final static List<String> requiredFields = List.of("name", "lastName", "money", "listOfPet");
 
     @Override
     public Human convertFromJsonObject(String jsonObj) {

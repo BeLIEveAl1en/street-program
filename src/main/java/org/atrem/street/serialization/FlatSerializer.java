@@ -7,12 +7,12 @@ import java.util.List;
 
 public class FlatSerializer implements Serializer<Flat> {
 
-    private final HumanSerializer HUMAN_DESERIALIZER = new HumanSerializer();
-    private final String asd = "{\"number\":%s," + "\"listOfHuman\":%s}";
+    private static final HumanSerializer HUMAN_DESERIALIZER = new HumanSerializer();
+    private static final String FLAT_TEMPLATE = "{\"number\":%s," + "\"listOfHuman\":%s}";
 
     @Override
     public String toJsonObject(Flat flat) {
-        return String.format(asd, flat.getNumber(), HUMAN_DESERIALIZER.toJsonArray(flat.getHumans()));
+        return String.format(FLAT_TEMPLATE, flat.getNumber(), HUMAN_DESERIALIZER.toJsonArray(flat.getHumans()));
     }
 
     @Override
