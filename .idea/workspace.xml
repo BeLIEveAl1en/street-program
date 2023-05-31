@@ -6,13 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="b8a3cbba-6c43-4ee7-b39b-9651b394e574" name="Default Changelist" comment="small fix">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/atrem/street/deserialization/FlatDeserializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/atrem/street/deserialization/FlatDeserializer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/atrem/street/deserialization/HouseDeserializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/atrem/street/deserialization/HouseDeserializer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/atrem/street/deserialization/HumanDeserializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/atrem/street/deserialization/HumanDeserializer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/atrem/street/serialization/FlatSerializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/atrem/street/serialization/FlatSerializer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/atrem/street/serialization/HouseSerializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/atrem/street/serialization/HouseSerializer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/atrem/street/serialization/HumanSerializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/atrem/street/serialization/HumanSerializer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/atrem/street/serialization/PetSerializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/atrem/street/serialization/PetSerializer.java" afterDir="false" />
     </list>
     <list id="6bf90c95-2b25-490a-b1b8-e5f6b08b787c" name="Changes by Артем" comment="Change serializers" />
     <option name="SHOW_DIALOG" value="false" />

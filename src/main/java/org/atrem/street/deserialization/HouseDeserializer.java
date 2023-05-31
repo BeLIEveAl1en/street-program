@@ -10,7 +10,7 @@ import static org.atrem.street.jsonParser.JsonParser.splitJsonArray;
 
 public class HouseDeserializer implements Deserializer {
 
-    private static final FlatDeserializer FlAT_DESERIALIZER = new FlatDeserializer();
+    private static final FlatDeserializer FLAT_DESERIALIZER = new FlatDeserializer();
     private final static List<String> requiredFields = List.of("number", "listOfFlat");
 
     @Override
@@ -19,7 +19,7 @@ public class HouseDeserializer implements Deserializer {
         Map<String, String> houseMap = getMapFromJsonObj(jsonObj);
         validateFields(houseMap);
         int number = Integer.parseInt(houseMap.get("number"));
-        List<Flat> flats = FlAT_DESERIALIZER.convertFromJsonArray(houseMap.get("listOfFlat"));
+        List<Flat> flats = FLAT_DESERIALIZER.convertFromJsonArray(houseMap.get("listOfFlat"));
         return new House(number, flats);
     }
 
