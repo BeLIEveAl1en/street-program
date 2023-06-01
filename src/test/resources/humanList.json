@@ -1,0 +1,28 @@
+[
+  {
+    "name": "вася",
+    "lastName": "пупкин",
+    "money": 100,
+    "listOfPet": [
+      {
+        "name": "Шарик",
+        "type": "CAT"
+      },
+      {
+        "name": "Тузик",
+        "type": "DOG"
+      }
+    ]
+  },
+  {
+    "name": "андрей",
+    "lastName": "лукин",
+    "money": 250,
+    "listOfPet": [
+      {
+        "name": "Кеша",
+        "type": "BIRD"
+      }
+    ]
+  }
+]
