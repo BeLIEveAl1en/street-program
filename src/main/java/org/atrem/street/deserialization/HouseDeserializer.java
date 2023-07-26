@@ -8,7 +8,7 @@ import java.util.*;
 import static org.atrem.street.jsonParser.JsonParser.getMapFromJsonObj;
 import static org.atrem.street.jsonParser.JsonParser.splitJsonArray;
 
-public class HouseDeserializer implements Deserializer {
+public class HouseDeserializer implements Deserializer<House> {
 
     private static final FlatDeserializer FLAT_DESERIALIZER = new FlatDeserializer();
     private final static List<String> requiredFields = List.of("number", "listOfFlat");

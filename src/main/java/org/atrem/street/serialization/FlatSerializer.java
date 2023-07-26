@@ -1,7 +1,6 @@
 package org.atrem.street.serialization;
 
 import org.atrem.street.entities.Flat;
-import org.atrem.street.entities.Human;
 
 import java.util.List;
 
