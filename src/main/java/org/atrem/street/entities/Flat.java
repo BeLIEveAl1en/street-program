@@ -1,22 +1,35 @@
 package org.atrem.street.entities;
 
-import java.awt.*;
-import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 public class Flat {
     private final int number;
-    private ArrayList listOfHuman;
+    private final List<Human> humans;
 
-    public Flat(int number, ArrayList listOfHuman){
+    public Flat(int number, List<Human> humans){
         this.number = number;
-        this.listOfHuman = listOfHuman;
+        this.humans = humans;
     }
 
     public int getNumber(){
         return number;
     }
 
-    public ArrayList getListOfHuman(int index){
-        return (ArrayList) listOfHuman.get(index);
+    public List<Human> getHumans(){
+        return humans;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Flat flat = (Flat) o;
+        return Objects.equals(number, flat.number) && humans.equals(flat.humans);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(number, humans);
     }
 }

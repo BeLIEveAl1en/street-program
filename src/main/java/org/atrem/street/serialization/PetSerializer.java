@@ -4,25 +4,28 @@ import org.atrem.street.entities.Pet;
 
 import java.util.List;
 
-public class PetSerializer implements Serializer<Pet>{
+public class PetSerializer implements Serializer<Pet> {
+
+    private static final String PET_TEMPLATE = "{\"name\":" + "\"%s\",\"type\":" + "\"%s\"}";
 
     @Override
     public String toJsonObject(Pet pet) {
-        String jsonObj = "{" +
-                "\"name\":" + "\"" + pet.getName() + "\"" +
-                "," +
-                "\"type\":" + "\"" + pet.getType().name() + "\"" +
-                "}";
-        return jsonObj;
+        return String.format(PET_TEMPLATE, pet.getName(), pet.getType().name());
     }
 
     @Override
     public String toJsonArray(List<Pet> array) {
-        String jsonArr = "[" +
-            "{\"name\": " + "\"" + array.get(0).getName() + "\", " + "\"type\": " + "\"" + array.get(0).getType().name() + "\"}, " +
-            "{\"name\": " + "\"" + array.get(1).getName() + "\", " + "\"type\": " + "\"" + array.get(1).getType().name() + "\"}, " +
-            "{\"name\": " + "\"" + array.get(2).getName() + "\", " + "\"type\": " + "\"" + array.get(2).getType().name() + "\"}" + "]";
+        StringBuilder jsonArray = new StringBuilder();
+        if (array == null || array.isEmpty()) {
+            return "[]";
+        }
+        jsonArray.append("[");
+        for (Pet pet : array) {
+            jsonArray.append(toJsonObject(pet)).append(",");
+        }
+        jsonArray.delete(jsonArray.length() - 1, jsonArray.length());
+        jsonArray.append("]");
 
-        return jsonArr;
+        return jsonArray.toString().replaceAll("\\s", "");
     }
 }

@@ -1,5 +1,15 @@
 {
-  "lastName": "1",
-  "name": "2",
-  "money": "1000"
+  "name": "вася",
+  "lastName": "пупкин",
+  "money": 100,
+  "listOfPet": [
+    {
+      "name": "Шарик",
+      "type": "CAT"
+    },
+    {
+      "name": "Тузик",
+      "type": "DOG"
+    }
+  ]
 }
