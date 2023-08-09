@@ -1,6 +1,10 @@
 package org.atrem.street.serialization;
 
 import org.atrem.street.entities.Flat;
+<<<<<<< HEAD
+=======
+import org.atrem.street.entities.Human;
+>>>>>>> 64c1928ca8b69c5033cbd52d7ef9c209d9dcea6a
 
 import java.util.List;
 

@@ -6,7 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="b8a3cbba-6c43-4ee7-b39b-9651b394e574" name="Default Changelist" comment="small fix">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+<<<<<<< HEAD
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+=======
+>>>>>>> 64c1928ca8b69c5033cbd52d7ef9c209d9dcea6a
       <change beforePath="$PROJECT_DIR$/src/main/java/org/atrem/street/deserialization/HouseDeserializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/atrem/street/deserialization/HouseDeserializer.java" afterDir="false" />
     </list>
     <list id="6bf90c95-2b25-490a-b1b8-e5f6b08b787c" name="Changes by Артем" comment="Change serializers" />
@@ -32,6 +35,10 @@
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+<<<<<<< HEAD
+=======
+    <option name="UPDATE_TYPE" value="REBASE" />
+>>>>>>> 64c1928ca8b69c5033cbd52d7ef9c209d9dcea6a
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -49,6 +56,7 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
+<<<<<<< HEAD
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
@@ -62,12 +70,31 @@
     "settings.editor.selected.configurable": "configurable.group.language"
   }
 }]]></component>
+=======
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/java/programs/DoS&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;editor.preferences.fonts.default&quot;
+  }
+}</component>
+>>>>>>> 64c1928ca8b69c5033cbd52d7ef9c209d9dcea6a
   <component name="RecentsManager">
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="org.atrem.street.deserialization" />
     </key>
   </component>
+<<<<<<< HEAD
   <component name="RunManager" selected="JUnit.JsonFlatDeserializerTest">
+=======
+  <component name="RunManager" selected="JUnit.JsonFlatSerializerTest">
+>>>>>>> 64c1928ca8b69c5033cbd52d7ef9c209d9dcea6a
     <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
@@ -79,6 +106,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+<<<<<<< HEAD
     <configuration name="JsonFlatDeserializerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="street-program-master" />
       <extension name="coverage">
@@ -89,11 +117,7 @@
       </extension>
       <option name="PACKAGE_NAME" value="org.atrem.street.deserialization" />
       <option name="MAIN_CLASS_NAME" value="org.atrem.street.deserialization.JsonFlatDeserializerTest" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
+=======
     <configuration name="JsonFlatSerializerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="street-program-master" />
       <extension name="coverage">
@@ -104,11 +128,36 @@
       </extension>
       <option name="PACKAGE_NAME" value="org.atrem.street.serialization" />
       <option name="MAIN_CLASS_NAME" value="org.atrem.street.serialization.JsonFlatSerializerTest" />
+>>>>>>> 64c1928ca8b69c5033cbd52d7ef9c209d9dcea6a
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+<<<<<<< HEAD
+    <configuration name="JsonFlatSerializerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+=======
+    <configuration name="JsonHouseSerializerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+>>>>>>> 64c1928ca8b69c5033cbd52d7ef9c209d9dcea6a
+      <module name="street-program-master" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.atrem.street.serialization.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="org.atrem.street.serialization" />
+<<<<<<< HEAD
+      <option name="MAIN_CLASS_NAME" value="org.atrem.street.serialization.JsonFlatSerializerTest" />
+=======
+      <option name="MAIN_CLASS_NAME" value="org.atrem.street.serialization.JsonHouseSerializerTest" />
+>>>>>>> 64c1928ca8b69c5033cbd52d7ef9c209d9dcea6a
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+<<<<<<< HEAD
     <configuration name="JsonHouseDeserializerTest.shouldDeserializeHouseObj" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="street-program-master" />
       <extension name="coverage">
@@ -121,11 +170,28 @@
       <option name="MAIN_CLASS_NAME" value="org.atrem.street.deserialization.JsonHouseDeserializerTest" />
       <option name="METHOD_NAME" value="shouldDeserializeHouseObj" />
       <option name="TEST_OBJECT" value="method" />
+=======
+    <configuration name="JsonHumanSerializerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="street-program-master" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.atrem.street.serialization.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="org.atrem.street.serialization" />
+      <option name="MAIN_CLASS_NAME" value="org.atrem.street.serialization.JsonHumanSerializerTest" />
+      <option name="TEST_OBJECT" value="class" />
+>>>>>>> 64c1928ca8b69c5033cbd52d7ef9c209d9dcea6a
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+<<<<<<< HEAD
     <configuration name="JsonHumanDeserializerTest.shouldDeserializeHumanArray" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+=======
+    <configuration name="JsonPetDeserializerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+>>>>>>> 64c1928ca8b69c5033cbd52d7ef9c209d9dcea6a
       <module name="street-program-master" />
       <extension name="coverage">
         <pattern>
@@ -134,9 +200,14 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="org.atrem.street.deserialization" />
+<<<<<<< HEAD
       <option name="MAIN_CLASS_NAME" value="org.atrem.street.deserialization.JsonHumanDeserializerTest" />
       <option name="METHOD_NAME" value="shouldDeserializeHumanArray" />
       <option name="TEST_OBJECT" value="method" />
+=======
+      <option name="MAIN_CLASS_NAME" value="org.atrem.street.deserialization.JsonPetDeserializerTest" />
+      <option name="TEST_OBJECT" value="class" />
+>>>>>>> 64c1928ca8b69c5033cbd52d7ef9c209d9dcea6a
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -158,11 +229,19 @@
     </configuration>
     <recent_temporary>
       <list>
+<<<<<<< HEAD
         <item itemvalue="JUnit.JsonFlatDeserializerTest" />
         <item itemvalue="JUnit.JsonHumanDeserializerTest.shouldDeserializeHumanArray" />
         <item itemvalue="JUnit.JsonHouseDeserializerTest.shouldDeserializeHouseObj" />
         <item itemvalue="JUnit.JsonFlatSerializerTest" />
         <item itemvalue="JUnit.JsonPetSerializerTest" />
+=======
+        <item itemvalue="JUnit.JsonFlatSerializerTest" />
+        <item itemvalue="JUnit.JsonPetSerializerTest" />
+        <item itemvalue="JUnit.JsonHumanSerializerTest" />
+        <item itemvalue="JUnit.JsonHouseSerializerTest" />
+        <item itemvalue="JUnit.JsonPetDeserializerTest" />
+>>>>>>> 64c1928ca8b69c5033cbd52d7ef9c209d9dcea6a
       </list>
     </recent_temporary>
   </component>
@@ -283,6 +362,7 @@
       <option name="project" value="LOCAL" />
       <updated>1682280429106</updated>
     </task>
+<<<<<<< HEAD
     <task id="LOCAL-00016" summary="small fix">
       <created>1685567584766</created>
       <option name="number" value="00016" />
@@ -291,6 +371,9 @@
       <updated>1685567584766</updated>
     </task>
     <option name="localTasksCounter" value="17" />
+=======
+    <option name="localTasksCounter" value="16" />
+>>>>>>> 64c1928ca8b69c5033cbd52d7ef9c209d9dcea6a
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

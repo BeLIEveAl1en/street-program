@@ -7,6 +7,10 @@ import org.atrem.street.entities.Pet;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+<<<<<<< HEAD
+=======
+import java.io.File;
+>>>>>>> 64c1928ca8b69c5033cbd52d7ef9c209d9dcea6a
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -14,6 +18,11 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
+<<<<<<< HEAD
+=======
+import static java.nio.charset.StandardCharsets.UTF_8;
+
+>>>>>>> 64c1928ca8b69c5033cbd52d7ef9c209d9dcea6a
 public class JsonFlatDeserializerTest {
     private final FlatDeserializer FlAT_DESERIALIZER = new FlatDeserializer();
 

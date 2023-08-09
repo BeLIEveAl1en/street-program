@@ -1,5 +1,9 @@
 package org.atrem.street.serialization;
 
+<<<<<<< HEAD
+=======
+import org.atrem.street.entities.Human;
+>>>>>>> 64c1928ca8b69c5033cbd52d7ef9c209d9dcea6a
 import org.atrem.street.entities.Pet;
 
 import java.util.List;

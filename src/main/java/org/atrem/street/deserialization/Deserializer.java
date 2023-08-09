@@ -4,8 +4,15 @@ import org.atrem.street.validation.JsonArrayValidator;
 import org.atrem.street.validation.JsonObjectValidator;
 import org.atrem.street.validation.ValidationResult;
 
+<<<<<<< HEAD
 import java.util.List;
 import java.util.Map;
+=======
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+>>>>>>> 64c1928ca8b69c5033cbd52d7ef9c209d9dcea6a
 
 public interface Deserializer<T> {
 
